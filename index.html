@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ruhia Upazila Bazar</title>
+  <meta name="description" content="রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="brand-mark">RB</span><span>Ruhia Upazila Bazar</span></a>
+      <nav>
+        <a href="#shops">দোকান</a>
+        <a href="#categories">ক্যাটাগরি</a>
+        <a href="#offers">অফার</a>
+        <a href="#featured">Featured</a>
+        <a href="#contact">যোগাযোগ</a>
+      </nav>
+      <a class="owner-btn" href="owner-login.html">Shop Owner Login</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Ruhia • Thakurgaon</span>
+          <h1>রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়</h1>
+          <p>আপনার কাছাকাছি দোকান, পণ্য, সেবা ও অফার খুঁজে নিন। দোকান মালিকরা নিজের দোকান পরিচালনা ও প্রচার করতে পারবেন।</p>
+          <div class="search-box">
+            <input id="searchInput" type="search" placeholder="দোকান, পণ্য, সেবা বা ক্যাটাগরি খুঁজুন">
+            <button onclick="searchShops()">খুঁজুন</button>
+          </div>
+          <div class="chips">
+            <button onclick="filterCategory('Shopping')">Shopping</button>
+            <button onclick="filterCategory('Electronics')">Electronics</button>
+            <button onclick="filterCategory('Food')">Food</button>
+            <button onclick="filterCategory('Health')">Health</button>
+            <button onclick="filterCategory('Services')">Services</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-icon">🏪</div>
+          <h2>আপনার দোকান যুক্ত করুন</h2>
+          <p>দোকানের তথ্য, ছবি, পণ্য/সেবা ও অফার নিজেই পরিচালনা করুন।</p>
+          <a class="primary" href="owner-register.html">Add Your Shop</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories" class="section">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Browse</span><h2>ক্যাটাগরি</h2></div></div>
+        <div class="category-grid">
+          <button onclick="filterCategory('Shopping')">🛍️<span>Shopping</span></button>
+          <button onclick="filterCategory('Electronics')">📱<span>Electronics</span></button>
+          <button onclick="filterCategory('Food')">🍲<span>Food</span></button>
+          <button onclick="filterCategory('Health')">🩺<span>Health</span></button>
+          <button onclick="filterCategory('Services')">🛠️<span>Services</span></button>
+          <button onclick="filterCategory('Beauty')">💇<span>Beauty</span></button>
+          <button onclick="filterCategory('Education')">📚<span>Education</span></button>
+          <button onclick="filterCategory('Auto')">🚗<span>Auto</span></button>
+          <button onclick="filterCategory('Furniture')">🪑<span>Furniture</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="shops" class="section muted">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Directory</span><h2>দোকান</h2></div></div>
+        <div id="shopGrid" class="empty-state">
+          <div class="empty-icon">🏪</div>
+          <h3>এখনো কোনো দোকান যুক্ত হয়নি</h3>
+          <p>প্রথমে একজন Shop Owner নিবন্ধন করে দোকান যুক্ত করলে এখানে বাস্তব দোকানের তথ্য দেখা যাবে।</p>
+          <a class="primary" href="owner-register.html">দোকান যুক্ত করুন</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="section">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Offers</span><h2>চলমান অফার</h2></div></div>
+        <div class="empty-state small"><h3>এখনো কোনো অফার নেই</h3><p>অনুমোদিত দোকানের বাস্তব অফার এখানে দেখানো হবে।</p></div>
+      </div>
+    </section>
+
+    <section id="featured" class="section muted">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Featured</span><h2>Featured Shops</h2></div></div>
+        <div class="empty-state small"><h3>এখনো কোনো Featured Shop নেই</h3><p>Admin Premium/Featured হিসেবে অনুমোদন করলে এখানে দেখানো হবে।</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-card">
+        <div><span class="eyebrow">Contact</span><h2>Ruhia Upazila Bazar</h2><p>রুহিয়ার স্থানীয় ব্যবসা, অফার ও সেবাকে এক জায়গায় তুলে ধরার প্ল্যাটফর্ম।</p></div>
+        <a class="primary" href="owner-login.html">Shop Owner Login</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">© <span id="year"></span> Ruhia Upazila Bazar</div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
