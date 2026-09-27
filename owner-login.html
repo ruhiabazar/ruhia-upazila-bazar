@@ -1,1 +1,51 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shop Owner Login - Ruhia Upazila Bazar</title><link rel="stylesheet" href="style.css"></head><body><main class="section"><div class="container" style="max-width:520px"><a href="index.html">← মূল সাইটে ফিরুন</a><div class="empty-state" style="margin-top:25px"><h1>Shop Owner Login</h1><p>বাস্তব Shop Owner account চালু হলে এখানে Login করা যাবে।</p><a class="primary" href="owner-register.html">নতুন Account খুলুন</a></div></div></main></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop Owner Login - Ruhia Upazila Bazar</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:#f5f7f6}.auth{max-width:560px;margin:40px auto;padding:20px}
+.card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.field{margin:14px 0}.field label{display:block;font-weight:600;margin-bottom:7px}
+input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #d7dfdb;border-radius:10px;font-size:16px}
+button{width:100%;padding:13px;border:0;border-radius:10px;background:#0B6E4F;color:#fff;font-size:16px;font-weight:700}
+.msg{margin-top:14px;padding:12px;border-radius:10px;display:none;line-height:1.5}.ok{display:block;background:#e9f8ef;color:#17653e}.err{display:block;background:#fff0f0;color:#a32626}a{color:#0B6E4F}
+</style>
+</head>
+<body>
+<main class="auth"><div class="card">
+<h1>Shop Owner Login</h1>
+<p>ইমেইল অথবা মোবাইল নম্বর দিয়ে লগইন করুন।</p>
+<form id="form">
+<div class="field"><label>ইমেইল / মোবাইল *</label><input id="id" required autocomplete="username" placeholder="ইমেইল অথবা 01XXXXXXXXX"></div>
+<div class="field"><label>পাসওয়ার্ড *</label><input id="password" type="password" required autocomplete="current-password"></div>
+<button type="submit">লগইন</button>
+</form>
+<div id="msg" class="msg"></div>
+<p>অ্যাকাউন্ট নেই? <a href="owner-register.html">নতুন অ্যাকাউন্ট তৈরি করুন</a></p>
+<p><a href="index.html">← মূল ওয়েবসাইট</a></p>
+</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const form=document.getElementById("form"),msg=document.getElementById("msg");
+function show(t,c){msg.textContent=t;msg.className="msg "+c}
+form.addEventListener("submit",async e=>{
+ e.preventDefault();
+ let id=document.getElementById("id").value.trim();
+ const password=document.getElementById("password").value;
+ try{
+  const c={password};
+  if(id.includes("@"))c.email=id;else{if(/^01[3-9]\d{8}$/.test(id))id="+88"+id;c.phone=id}
+  const {data,error}=await supabaseClient.auth.signInWithPassword(c);
+  if(error)throw error;
+  if(!data.user)throw new Error("লগইন সম্পন্ন হয়নি।");
+  show("লগইন সফল হয়েছে।","ok");
+  setTimeout(()=>location.href="owner-dashboard.html",700);
+ }catch(err){show(err.message||"লগইন সম্পন্ন হয়নি।","err")}
+});
+</script>
+</body>
+</html>
