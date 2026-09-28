@@ -3,7 +3,6 @@
 
 (function () {
 
-  // Load Supabase library
   const script = document.createElement("script");
 
   script.src =
@@ -21,17 +20,22 @@
       return;
     }
 
-    window.ruhiaSupabase =
+    const client =
       window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
       );
 
+    // Main client name
+    window.supabaseClient = client;
+
+    // Backup/global name
+    window.ruhiaSupabase = client;
+
     console.log(
       "Ruhia Upazila Bazar: Supabase connected."
     );
 
-    // Notify other scripts that Supabase is ready
     window.dispatchEvent(
       new CustomEvent("ruhiaSupabaseReady")
     );
