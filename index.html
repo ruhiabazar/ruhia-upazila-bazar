@@ -1,110 +1,558 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ruhia Upazila Bazar</title>
-  <meta name="description" content="রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B6E4F">
+<title>Ruhia Upazila Bazar</title>
+<meta name="description" content="রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a class="brand" href="index.html"><span class="brand-mark">RB</span><span>Ruhia Upazila Bazar</span></a>
-      <nav>
-        <a href="#shops">দোকান</a>
-        <a href="#categories">ক্যাটাগরি</a>
-        <a href="#offers">অফার</a>
-        <a href="#featured">Featured</a>
-        <a href="#contact">যোগাযোগ</a>
-      </nav>
-      <a class="owner-btn" href="owner-login.html">Shop Owner Login</a>
+
+<header class="top">
+  <div class="top-in">
+
+    <a class="brand" href="index.html">
+      <span class="logo">
+        <b>R</b>
+        <b>B</b>
+        <i>⌂</i>
+      </span>
+
+      <span>
+        <strong>Ruhia</strong>
+        <small>Upazila Bazar</small>
+      </span>
+    </a>
+
+    <a class="owner" href="owner-login.html">
+      Owner Login
+    </a>
+
+  </div>
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-in wrap">
+
+    <span class="location">
+      📍 Ruhia • Thakurgaon
+    </span>
+
+    <h1>
+      রুহিয়ার ব্যবসা,<br>
+      <em>অফার ও সেবা</em>—এক জায়গায়
+    </h1>
+
+    <p>
+      কাছাকাছি দোকান, পণ্য, সেবা ও অফার সহজেই খুঁজে নিন।
+    </p>
+
+    <div class="search">
+
+      <span>⌕</span>
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="দোকান, পণ্য, সেবা বা ক্যাটাগরি"
+      >
+
+      <button id="searchBtn">
+        খুঁজুন
+      </button>
+
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">Ruhia • Thakurgaon</span>
-          <h1>রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়</h1>
-          <p>আপনার কাছাকাছি দোকান, পণ্য, সেবা ও অফার খুঁজে নিন। দোকান মালিকরা নিজের দোকান পরিচালনা ও প্রচার করতে পারবেন।</p>
-          <div class="search-box">
-            <input id="searchInput" type="search" placeholder="দোকান, পণ্য, সেবা বা ক্যাটাগরি খুঁজুন">
-            <button onclick="searchShops()">খুঁজুন</button>
-          </div>
-          <div class="chips">
-            <button onclick="filterCategory('Shopping')">Shopping</button>
-            <button onclick="filterCategory('Electronics')">Electronics</button>
-            <button onclick="filterCategory('Food')">Food</button>
-            <button onclick="filterCategory('Health')">Health</button>
-            <button onclick="filterCategory('Services')">Services</button>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-icon">🏪</div>
-          <h2>আপনার দোকান যুক্ত করুন</h2>
-          <p>দোকানের তথ্য, ছবি, পণ্য/সেবা ও অফার নিজেই পরিচালনা করুন।</p>
-          <a class="primary" href="owner-register.html">Add Your Shop</a>
-        </div>
+    <div class="quick">
+
+      <button data-cat="মুদিখানা">
+        🛒 মুদিখানা
+      </button>
+
+      <button data-cat="কসমেটিকস">
+        💄 কসমেটিকস
+      </button>
+
+      <button data-cat="রেস্টুরেন্ট ও খাবার">
+        🍲 খাবার
+      </button>
+
+      <button data-cat="মোবাইল ও কম্পিউটার">
+        📱 মোবাইল
+      </button>
+
+      <button data-cat="ফার্মেসি">
+        💊 ফার্মেসি
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="promo">
+
+  <div class="wrap">
+
+    <div class="promo-card">
+
+      <div class="promo-icon">
+        🏪
       </div>
-    </section>
 
-    <section id="categories" class="section">
-      <div class="container">
-        <div class="section-head"><div><span class="eyebrow">Browse</span><h2>ক্যাটাগরি</h2></div></div>
-        <div class="category-grid">
-          <button onclick="filterCategory('Shopping')">🛍️<span>Shopping</span></button>
-          <button onclick="filterCategory('Electronics')">📱<span>Electronics</span></button>
-          <button onclick="filterCategory('Food')">🍲<span>Food</span></button>
-          <button onclick="filterCategory('Health')">🩺<span>Health</span></button>
-          <button onclick="filterCategory('Services')">🛠️<span>Services</span></button>
-          <button onclick="filterCategory('Beauty')">💇<span>Beauty</span></button>
-          <button onclick="filterCategory('Education')">📚<span>Education</span></button>
-          <button onclick="filterCategory('Auto')">🚗<span>Auto</span></button>
-          <button onclick="filterCategory('Furniture')">🪑<span>Furniture</span></button>
-        </div>
+      <div>
+
+        <label>SHOP OWNER</label>
+
+        <h2>
+          আপনার দোকান যুক্ত করুন
+        </h2>
+
+        <p>
+          তথ্য, ছবি, পণ্য/সেবা ও অফার নিজেই পরিচালনা করুন।
+        </p>
+
       </div>
-    </section>
 
-    <section id="shops" class="section muted">
-      <div class="container">
-        <div class="section-head"><div><span class="eyebrow">Directory</span><h2>দোকান</h2></div></div>
-        <div id="shopGrid" class="empty-state">
-          <div class="empty-icon">🏪</div>
-          <h3>এখনো কোনো দোকান যুক্ত হয়নি</h3>
-          <p>প্রথমে একজন Shop Owner নিবন্ধন করে দোকান যুক্ত করলে এখানে বাস্তব দোকানের তথ্য দেখা যাবে।</p>
-          <a class="primary" href="owner-register.html">দোকান যুক্ত করুন</a>
-        </div>
+      <a href="owner-register.html">
+        দোকান যুক্ত করুন <b>→</b>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="categories" class="section">
+
+  <div class="wrap">
+
+    <div class="head">
+
+      <div>
+        <label>BROWSE</label>
+        <h2>সব ক্যাটাগরি</h2>
       </div>
-    </section>
 
-    <section id="offers" class="section">
-      <div class="container">
-        <div class="section-head"><div><span class="eyebrow">Offers</span><h2>চলমান অফার</h2></div></div>
-        <div class="empty-state small"><h3>এখনো কোনো অফার নেই</h3><p>অনুমোদিত দোকানের বাস্তব অফার এখানে দেখানো হবে।</p></div>
+      <span>27টি</span>
+
+    </div>
+
+
+    <div class="cats">
+
+      <button data-cat="মুদিখানা">
+        <i>🛒</i>
+        মুদিখানা
+      </button>
+
+      <button data-cat="পোশাক ও ফ্যাশন">
+        <i>👗</i>
+        পোশাক ও ফ্যাশন
+      </button>
+
+      <button data-cat="জুতা ও ব্যাগ">
+        <i>👞</i>
+        জুতা ও ব্যাগ
+      </button>
+
+      <button data-cat="কসমেটিকস">
+        <i>💄</i>
+        কসমেটিকস
+      </button>
+
+      <button data-cat="জুয়েলারি">
+        <i>💍</i>
+        জুয়েলারি
+      </button>
+
+      <button data-cat="মোবাইল ও কম্পিউটার">
+        <i>📱</i>
+        মোবাইল ও কম্পিউটার
+      </button>
+
+      <button data-cat="ইলেকট্রনিক্স">
+        <i>💻</i>
+        ইলেকট্রনিক্স
+      </button>
+
+      <button data-cat="রেস্টুরেন্ট ও খাবার">
+        <i>🍲</i>
+        রেস্টুরেন্ট ও খাবার
+      </button>
+
+      <button data-cat="বেকারি ও মিষ্টি">
+        <i>🧁</i>
+        বেকারি ও মিষ্টি
+      </button>
+
+      <button data-cat="ফার্মেসি">
+        <i>💊</i>
+        ফার্মেসি
+      </button>
+
+      <button data-cat="ডাক্তার ও ক্লিনিক">
+        <i>🩺</i>
+        ডাক্তার ও ক্লিনিক
+      </button>
+
+      <button data-cat="বিউটি ও সেলুন">
+        <i>💇</i>
+        বিউটি ও সেলুন
+      </button>
+
+      <button data-cat="শিক্ষা">
+        <i>📚</i>
+        শিক্ষা
+      </button>
+
+      <button data-cat="কোচিং সেন্টার">
+        <i>🎓</i>
+        কোচিং সেন্টার
+      </button>
+
+      <button data-cat="সার্ভিসেস">
+        <i>🛠️</i>
+        সার্ভিসেস
+      </button>
+
+      <button data-cat="প্রিন্টিং ও ফটোকপি">
+        <i>🖨️</i>
+        প্রিন্টিং ও ফটোকপি
+      </button>
+
+      <button data-cat="ফটোগ্রাফি ও স্টুডিও">
+        <i>📸</i>
+        ফটোগ্রাফি ও স্টুডিও
+      </button>
+
+      <button data-cat="হার্ডওয়্যার ও নির্মাণ সামগ্রী">
+        <i>🔧</i>
+        হার্ডওয়্যার ও নির্মাণ
+      </button>
+
+      <button data-cat="ফার্নিচার">
+        <i>🪑</i>
+        ফার্নিচার
+      </button>
+
+      <button data-cat="অটো, গাড়ি ও পরিবহন">
+        <i>🚗</i>
+        অটো, গাড়ি ও পরিবহন
+      </button>
+
+      <button data-cat="বাইক/গাড়ির পার্টস ও সার্ভিস">
+        <i>🏍️</i>
+        বাইক/গাড়ির পার্টস
+      </button>
+
+      <button data-cat="কৃষি ও কৃষি সামগ্রী">
+        <i>🌾</i>
+        কৃষি ও কৃষি সামগ্রী
+      </button>
+
+      <button data-cat="গবাদিপশু ও পোলট্রি">
+        <i>🐄</i>
+        গবাদিপশু ও পোলট্রি
+      </button>
+
+      <button data-cat="জমি, বাড়ি ও রিয়েল এস্টেট">
+        <i>🏠</i>
+        জমি, বাড়ি ও রিয়েল এস্টেট
+      </button>
+
+      <button data-cat="ব্যবসায়িক ও পেশাগত সেবা">
+        <i>💼</i>
+        ব্যবসায়িক ও পেশাগত সেবা
+      </button>
+
+      <button data-cat="ইভেন্ট ও ডেকোরেশন">
+        <i>🎉</i>
+        ইভেন্ট ও ডেকোরেশন
+      </button>
+
+      <button data-cat="হোম সার্ভিস">
+        <i>🧹</i>
+        হোম সার্ভিস
+      </button>
+
+    </div>
+
+  </div>
+
+</section><section id="shops" class="section tint">
+
+  <div class="wrap">
+
+    <div class="head">
+
+      <div>
+        <label>DIRECTORY</label>
+        <h2>দোকান ও ব্যবসা</h2>
       </div>
-    </section>
 
-    <section id="featured" class="section muted">
-      <div class="container">
-        <div class="section-head"><div><span class="eyebrow">Featured</span><h2>Featured Shops</h2></div></div>
-        <div class="empty-state small"><h3>এখনো কোনো Featured Shop নেই</h3><p>Admin Premium/Featured হিসেবে অনুমোদন করলে এখানে দেখানো হবে।</p></div>
+    </div>
+
+
+    <div class="empty">
+
+      <div>🏪</div>
+
+      <h3>
+        এখনো কোনো দোকান যুক্ত হয়নি
+      </h3>
+
+      <p>
+        বাস্তব Shop Owner-রা দোকান যুক্ত করলে
+        অনুমোদিত দোকান এখানে দেখা যাবে।
+      </p>
+
+      <a href="owner-register.html">
+        প্রথম দোকান যুক্ত করুন →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="offers" class="section">
+
+  <div class="wrap">
+
+    <div class="head">
+
+      <div>
+        <label>OFFERS</label>
+        <h2>চলমান অফার</h2>
       </div>
-    </section>
 
-    <section id="contact" class="section">
-      <div class="container contact-card">
-        <div><span class="eyebrow">Contact</span><h2>Ruhia Upazila Bazar</h2><p>রুহিয়ার স্থানীয় ব্যবসা, অফার ও সেবাকে এক জায়গায় তুলে ধরার প্ল্যাটফর্ম।</p></div>
-        <a class="primary" href="owner-login.html">Shop Owner Login</a>
+    </div>
+
+
+    <div class="empty small">
+
+      <div>🏷️</div>
+
+      <h3>
+        এখনো কোনো অফার নেই
+      </h3>
+
+      <p>
+        অনুমোদিত দোকানের বাস্তব অফার এখানে
+        দেখানো হবে।
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="featured" class="section tint">
+
+  <div class="wrap">
+
+    <div class="head">
+
+      <div>
+        <label>FEATURED</label>
+        <h2>Featured Shops</h2>
       </div>
-    </section>
-  </main>
 
-  <footer><div class="container">© <span id="year"></span> Ruhia Upazila Bazar</div></footer>
-  <script src="app.js"></script>
+    </div>
+
+
+    <div class="empty small">
+
+      <div>⭐</div>
+
+      <h3>
+        এখনো কোনো Featured Shop নেই
+      </h3>
+
+      <p>
+        Admin Premium/Featured হিসেবে অনুমোদন
+        করলে এখানে দেখা যাবে।
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="special" class="section">
+
+  <div class="wrap">
+
+    <div class="special">
+
+      <div>⭐</div>
+
+      <section>
+
+        <label>DIRECTORY</label>
+
+        <h2>
+          Owner ও বিশেষ ব্যক্তিবর্গ
+        </h2>
+
+        <p>
+          Admin-এর মাধ্যমে প্রকাশিত গুরুত্বপূর্ণ
+          ব্যক্তিদের তথ্য।
+        </p>
+
+      </section>
+
+      <b>→</b>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="contact" class="section contact">
+
+  <div class="wrap">
+
+    <div class="contact-card">
+
+      <label>
+        RUHIA UPAZILA BAZAR
+      </label>
+
+      <h2>
+        রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়
+      </h2>
+
+      <p>
+        স্থানীয় ব্যবসা খুঁজুন এবং Shop Owner হিসেবে
+        আপনার ব্যবসা প্রচার করুন।
+      </p>
+
+      <a href="owner-login.html">
+        Shop Owner Login
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<nav class="bottom">
+
+  <a href="index.html">
+    <b>⌂</b>
+    <small>হোম</small>
+  </a>
+
+  <a href="#categories">
+    <b>▦</b>
+    <small>ক্যাটাগরি</small>
+  </a>
+
+  <a class="add" href="owner-register.html">
+    <b>＋</b>
+    <small>দোকান</small>
+  </a>
+
+  <a href="#offers">
+    <b>🏷</b>
+    <small>অফার</small>
+  </a>
+
+  <a href="owner-login.html">
+    <b>♙</b>
+    <small>Owner</small>
+  </a>
+
+</nav>
+
+
+<footer>
+  © <span id="year"></span> Ruhia Upazila Bazar
+</footer>
+
+
+<script>
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+function selectCat(c) {
+
+  document.getElementById("searchInput").value = c;
+
+  document
+    .getElementById("shops")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+document
+  .querySelectorAll("[data-cat]")
+  .forEach(x => {
+
+    x.addEventListener(
+      "click",
+      () => selectCat(x.dataset.cat)
+    );
+
+  });
+
+
+document
+  .getElementById("searchBtn")
+  .addEventListener("click", () => {
+
+    if (
+      document
+        .getElementById("searchInput")
+        .value
+        .trim()
+    ) {
+
+      document
+        .getElementById("shops")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+  });
+
+</script>
+
+
+<script src="app.js"></script>
+
 </body>
 </html>
