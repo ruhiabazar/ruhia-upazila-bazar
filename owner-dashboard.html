@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Owner Dashboard - Ruhia Upazila Bazar</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  background:#f3f7f5;
+  color:#19352b;
+}
+
+.dashboard{
+  max-width:1100px;
+  margin:auto;
+  padding:18px;
+}
+
+.topbar{
+  background:#0B6E4F;
+  color:#fff;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.topbar h1{
+  margin:0 0 6px;
+  font-size:24px;
+}
+
+.topbar p{
+  margin:0;
+  opacity:.9;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 6px 22px rgba(0,0,0,.06);
+}
+
+.card h3{
+  margin:0 0 8px;
+  color:#0B6E4F;
+}
+
+.card p{
+  margin:0;
+  color:#65736d;
+  line-height:1.6;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.menu a{
+  display:block;
+  background:#fff;
+  color:#19352b;
+  text-decoration:none;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+  font-weight:700;
+}
+
+.menu a span{
+  display:block;
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.logout{
+  margin-top:18px;
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  background:#d93025;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+}
+
+.home{
+  display:block;
+  text-align:center;
+  margin-top:15px;
+  color:#0B6E4F;
+  text-decoration:none;
+  font-weight:700;
+}
+
+@media(min-width:700px){
+  .cards{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .menu{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="dashboard">
+
+  <section class="topbar">
+    <h1>Shop Owner Dashboard</h1>
+    <p id="welcome">আপনার ব্যবসা পরিচালনা করুন</p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <h3>🏪 আমার দোকান</h3>
+      <p id="shopStatus">দোকানের তথ্য এখনো যোগ করা হয়নি।</p>
+    </div>
+
+    <div class="card">
+      <h3>📦 পণ্য / সার্ভিস</h3>
+      <p>আপনার পণ্য ও সার্ভিস পরিচালনা করুন।</p>
+    </div>
+
+    <div class="card">
+      <h3>🎁 অফার</h3>
+      <p>আপনার ব্যবসার অফার তৈরি ও পরিচালনা করুন।</p>
+    </div>
+
+    <div class="card">
+      <h3>💳 প্যাকেজ</h3>
+      <p>Promotion Package ও পেমেন্টের তথ্য দেখুন।</p>
+    </div>
+
+  </section>
+
+  <section class="menu">
+
+    <a href="#">
+      <span>🏪</span>
+      My Shop
+    </a>
+
+    <a href="#">
+      <span>📸</span>
+      Photos
+    </a>
+
+    <a href="#">
+      <span>📦</span>
+      Products / Services
+    </a>
+
+    <a href="#">
+      <span>🎁</span>
+      Offers
+    </a>
+
+    <a href="#">
+      <span>🚀</span>
+      Promotion
+    </a>
+
+    <a href="#">
+      <span>💳</span>
+      My Package
+    </a>
+
+    <a href="#">
+      <span>💰</span>
+      Payments
+    </a>
+
+    <a href="#">
+      <span>📊</span>
+      Analytics
+    </a>
+
+  </section>
+
+  <button class="logout" id="logout">
+    লগআউট
+  </button>
+
+  <a class="home" href="index.html">
+    ← মূল ওয়েবসাইটে ফিরে যান
+  </a>
+
+</main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+async function loadDashboard(){
+
+  if(!window.supabaseClient){
+    document.getElementById("welcome").textContent =
+      "Supabase সংযোগ পাওয়া যাচ্ছে না।";
+    return;
+  }
+
+  const {
+    data: { session },
+    error
+  } = await window.supabaseClient.auth.getSession();
+
+  if(error || !session){
+    window.location.href = "owner-login.html";
+    return;
+  }
+
+  const user = session.user;
+
+  const fullName =
+    user.user_metadata?.full_name ||
+    "Shop Owner";
+
+  document.getElementById("welcome").textContent =
+    "স্বাগতম, " + fullName + " 👋";
+
+  /* নিজের profile তথ্য যাচাই */
+  const { data: profile } =
+    await window.supabaseClient
+      .from("profiles")
+      .select("full_name,mobile,email,status,role")
+      .eq("id", user.id)
+      .maybeSingle();
+
+  if(profile){
+
+    if(profile.status && profile.status !== "active"){
+      document.getElementById("welcome").textContent =
+        "আপনার অ্যাকাউন্ট বর্তমানে সক্রিয় নয়।";
+    }
+
+  }
+}
+
+
+/* Logout */
+document.getElementById("logout").addEventListener("click", async function(){
+
+  if(window.supabaseClient){
+    await window.supabaseClient.auth.signOut();
+  }
+
+  window.location.href = "owner-login.html";
+});
+
+
+loadDashboard();
+</script>
+
+</body>
+</html>
