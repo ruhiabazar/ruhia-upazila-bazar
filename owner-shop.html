@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Shop - Ruhia Upazila Bazar</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  background:linear-gradient(135deg,#eef8f3,#fff8e8);
+  color:#19352b;
+}
+
+.shop-page{
+  max-width:760px;
+  margin:auto;
+  padding:18px;
+}
+
+.header{
+  background:#0B6E4F;
+  color:#fff;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:25px;
+}
+
+.header p{
+  margin:0;
+  opacity:.9;
+}
+
+.form-card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 8px 28px rgba(0,0,0,.07);
+}
+
+.field{
+  margin:16px 0;
+}
+
+.field label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px;
+  border:1px solid #d7dfdb;
+  border-radius:12px;
+  font-size:16px;
+  background:#fff;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  outline:none;
+  border-color:#0B6E4F;
+  box-shadow:0 0 0 3px rgba(11,110,79,.10);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0 14px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#0B6E4F;
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#095b42;
+}
+
+.msg{
+  display:none;
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+  line-height:1.5;
+}
+
+.ok{
+  display:block;
+  background:#e9f8ef;
+  color:#17653e;
+}
+
+.err{
+  display:block;
+  background:#fff0f0;
+  color:#a32626;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  margin-top:16px;
+  color:#0B6E4F;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.note{
+  color:#68766f;
+  font-size:13px;
+  line-height:1.6;
+}
+
+@media(min-width:650px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="shop-page">
+
+  <section class="header">
+    <h1>🏪 My Shop</h1>
+    <p>আপনার ব্যবসার তথ্য যোগ ও পরিচালনা করুন</p>
+  </section>
+
+  <section class="form-card">
+
+    <form id="shopForm">
+
+      <div class="field">
+        <label>দোকানের নাম *</label>
+        <input
+          id="shopName"
+          required
+          placeholder="আপনার দোকানের নাম"
+        >
+      </div>
+
+      <div class="field">
+        <label>ক্যাটাগরি *</label>
+        <select id="category" required>
+          <option value="">ক্যাটাগরি নির্বাচন করুন</option>
+          <option>মুদিখানা</option>
+          <option>পোশাক ও ফ্যাশন</option>
+          <option>জুতা ও ব্যাগ</option>
+          <option>কসমেটিকস</option>
+          <option>জুয়েলারি</option>
+          <option>মোবাইল ও কম্পিউটার</option>
+          <option>ইলেকট্রনিক্স</option>
+          <option>রেস্টুরেন্ট ও খাবার</option>
+          <option>বেকারি ও মিষ্টি</option>
+          <option>ফার্মেসি</option>
+          <option>ডাক্তার ও ক্লিনিক</option>
+          <option>বিউটি ও সেলুন</option>
+          <option>শিক্ষা</option>
+          <option>কোচিং সেন্টার</option>
+          <option>সার্ভিসেস</option>
+          <option>প্রিন্টিং ও ফটোকপি</option>
+          <option>ফটোগ্রাফি ও স্টুডিও</option>
+          <option>হার্ডওয়্যার ও নির্মাণ সামগ্রী</option>
+          <option>ফার্নিচার</option>
+          <option>অটো, গাড়ি ও পরিবহন</option>
+          <option>বাইক/গাড়ির পার্টস ও সার্ভিস</option>
+          <option>কৃষি ও কৃষি সামগ্রী</option>
+          <option>গবাদিপশু ও পোলট্রি</option>
+          <option>জমি, বাড়ি ও রিয়েল এস্টেট</option>
+          <option>ব্যবসায়িক ও পেশাগত সেবা</option>
+          <option>ইভেন্ট ও ডেকোরেশন</option>
+          <option>হোম সার্ভিস</option>
+        </select>
+      </div>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>মোবাইল নম্বর *</label>
+          <input
+            id="phone"
+            required
+            inputmode="tel"
+            placeholder="01XXXXXXXXX"
+          >
+        </div>
+
+        <div class="field">
+          <label>WhatsApp নম্বর</label>
+          <input
+            id="whatsapp"
+            inputmode="tel"
+            placeholder="01XXXXXXXXX"
+          >
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>ঠিকানা *</label>
+        <input
+          id="address"
+          required
+          placeholder="যেমন: কলেজ রোড, রুহিয়া"
+        >
+      </div>
+
+      <div class="field">
+        <label>দোকানের বিস্তারিত</label>
+        <textarea
+          id="description"
+          placeholder="আপনার দোকান বা ব্যবসা সম্পর্কে লিখুন..."
+        ></textarea>
+      </div>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>খোলার সময়</label>
+          <input
+            id="opening"
+            type="time"
+          >
+        </div>
+
+        <div class="field">
+          <label>বন্ধের সময়</label>
+          <input
+            id="closing"
+            type="time"
+          >
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Google Maps Link</label>
+        <input
+          id="mapUrl"
+          type="url"
+          placeholder="https://maps.google.com/..."
+        >
+      </div>
+
+      <p class="note">
+        ⭐ দোকানের তথ্য সঠিকভাবে দিন। পরবর্তীতে এই তথ্য আপনার
+        পাবলিক Shop Profile-এ দেখানো হবে।
+      </p>
+
+      <button type="submit">
+        💾 দোকানের তথ্য সংরক্ষণ করুন
+      </button>
+
+    </form>
+
+    <div id="msg" class="msg"></div>
+
+    <a class="back" href="owner-dashboard.html">
+      ← Dashboard-এ ফিরে যান
+    </a>
+
+  </section><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+const form = document.getElementById("shopForm");
+const msg = document.getElementById("msg");
+
+function showMessage(text, type) {
+  msg.textContent = text;
+  msg.className = "msg " + type;
+}
+
+async function loadShop() {
+
+  if (!window.supabaseClient) {
+    showMessage("Supabase সংযোগ পাওয়া যাচ্ছে না।", "err");
+    return;
+  }
+
+  const {
+    data: { session },
+    error: sessionError
+  } = await window.supabaseClient.auth.getSession();
+
+  if (sessionError || !session) {
+    window.location.href = "owner-login.html";
+    return;
+  }
+
+  const userId = session.user.id;
+
+  const { data: shop, error } =
+    await window.supabaseClient
+      .from("shops")
+      .select("*")
+      .eq("owner_id", userId)
+      .maybeSingle();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (!shop) {
+    return;
+  }
+
+  document.getElementById("shopName").value =
+    shop.name || "";
+
+  document.getElementById("category").value =
+    shop.category || "";
+
+  document.getElementById("phone").value =
+    shop.phone || "";
+
+  document.getElementById("whatsapp").value =
+    shop.whatsapp || "";
+
+  document.getElementById("address").value =
+    shop.address || "";
+
+  document.getElementById("description").value =
+    shop.description || "";
+
+  document.getElementById("mapUrl").value =
+    shop.map_url || "";
+
+  if (shop.opening_hours) {
+    const parts = shop.opening_hours.split("-");
+    if (parts.length === 2) {
+      document.getElementById("opening").value =
+        parts[0].trim();
+
+      document.getElementById("closing").value =
+        parts[1].trim();
+    }
+  }
+}
+
+
+form.addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+
+  if (!window.supabaseClient) {
+    showMessage("Supabase সংযোগ পাওয়া যাচ্ছে না।", "err");
+    return;
+  }
+
+  const {
+    data: { session }
+  } = await window.supabaseClient.auth.getSession();
+
+  if (!session) {
+    window.location.href = "owner-login.html";
+    return;
+  }
+
+  const userId = session.user.id;
+
+  const shopName =
+    document.getElementById("shopName").value.trim();
+
+  const category =
+    document.getElementById("category").value;
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const whatsapp =
+    document.getElementById("whatsapp").value.trim();
+
+  const address =
+    document.getElementById("address").value.trim();
+
+  const description =
+    document.getElementById("description").value.trim();
+
+  const opening =
+    document.getElementById("opening").value;
+
+  const closing =
+    document.getElementById("closing").value;
+
+  const mapUrl =
+    document.getElementById("mapUrl").value.trim();
+
+
+  if (!/^01[3-9]\d{8}$/.test(phone)) {
+    showMessage(
+      "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।",
+      "err"
+    );
+    return;
+  }
+
+  if (
+    whatsapp &&
+    !/^01[3-9]\d{8}$/.test(whatsapp)
+  ) {
+    showMessage(
+      "সঠিক WhatsApp নম্বর দিন।",
+      "err"
+    );
+    return;
+  }
+
+
+  const openingHours =
+    opening && closing
+      ? opening + " - " + closing
+      : "";
+
+
+  const shopData = {
+    owner_id: userId,
+    name: shopName,
+    category: category,
+    phone: phone,
+    whatsapp: whatsapp || null,
+    address: address,
+    description: description || null,
+    opening_hours: openingHours || null,
+    map_url: mapUrl || null
+  };
+
+
+  const { data: existingShop } =
+    await window.supabaseClient
+      .from("shops")
+      .select("id")
+      .eq("owner_id", userId)
+      .maybeSingle();
+
+
+  let result;
+
+
+  if (existingShop) {
+
+    result =
+      await window.supabaseClient
+        .from("shops")
+        .update(shopData)
+        .eq("id", existingShop.id);
+
+  } else {
+
+    result =
+      await window.supabaseClient
+        .from("shops")
+        .insert(shopData);
+
+  }
+
+
+  if (result.error) {
+    console.error(result.error);
+
+    showMessage(
+      result.error.message ||
+      "দোকানের তথ্য সংরক্ষণ করা যায়নি।",
+      "err"
+    );
+
+    return;
+  }
+
+
+  showMessage(
+    "✅ দোকানের তথ্য সফলভাবে সংরক্ষণ হয়েছে।",
+    "ok"
+  );
+
+});
+
+
+loadShop();
+</script>
+
+</body>
+</html>
+
+</main>
