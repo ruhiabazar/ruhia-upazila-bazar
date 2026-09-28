@@ -9,7 +9,7 @@
 <style>
 body{
   margin:0;
-  background:#f3f7f5;
+  background:linear-gradient(135deg,#eef8f3,#fff8e8);
   color:#19352b;
 }
 
@@ -22,19 +22,20 @@ body{
 .topbar{
   background:#0B6E4F;
   color:#fff;
-  border-radius:20px;
-  padding:20px;
+  border-radius:22px;
+  padding:22px;
   margin-bottom:18px;
+  box-shadow:0 8px 25px rgba(11,110,79,.15);
 }
 
 .topbar h1{
-  margin:0 0 6px;
-  font-size:24px;
+  margin:0 0 7px;
+  font-size:25px;
 }
 
 .topbar p{
   margin:0;
-  opacity:.9;
+  opacity:.92;
 }
 
 .cards{
@@ -77,6 +78,11 @@ body{
   padding:18px;
   box-shadow:0 5px 18px rgba(0,0,0,.05);
   font-weight:700;
+  transition:.2s;
+}
+
+.menu a:active{
+  transform:scale(.98);
 }
 
 .menu a span{
@@ -131,29 +137,37 @@ body{
 
     <div class="card">
       <h3>🏪 আমার দোকান</h3>
-      <p id="shopStatus">দোকানের তথ্য এখনো যোগ করা হয়নি।</p>
+      <p id="shopStatus">
+        দোকানের তথ্য এখনো যোগ করা হয়নি।
+      </p>
     </div>
 
     <div class="card">
       <h3>📦 পণ্য / সার্ভিস</h3>
-      <p>আপনার পণ্য ও সার্ভিস পরিচালনা করুন।</p>
+      <p>
+        আপনার পণ্য ও সার্ভিস পরিচালনা করুন।
+      </p>
     </div>
 
     <div class="card">
       <h3>🎁 অফার</h3>
-      <p>আপনার ব্যবসার অফার তৈরি ও পরিচালনা করুন।</p>
+      <p>
+        আপনার ব্যবসার অফার তৈরি ও পরিচালনা করুন।
+      </p>
     </div>
 
     <div class="card">
       <h3>💳 প্যাকেজ</h3>
-      <p>Promotion Package ও পেমেন্টের তথ্য দেখুন।</p>
+      <p>
+        Promotion Package ও পেমেন্টের তথ্য দেখুন।
+      </p>
     </div>
 
   </section>
 
   <section class="menu">
 
-    <a href="#">
+    <a href="owner-shop.html">
       <span>🏪</span>
       My Shop
     </a>
@@ -209,58 +223,81 @@ body{
 <script>
 async function loadDashboard(){
 
-  if(!window.supabaseClient){
-    document.getElementById("welcome").textContent =
-      "Supabase সংযোগ পাওয়া যাচ্ছে না।";
-    return;
-  }
+  const { data, error } =
+    await window.supabaseClient.auth.getSession();
 
-  const {
-    data: { session },
-    error
-  } = await window.supabaseClient.auth.getSession();
-
-  if(error || !session){
+  if(error || !data.session){
     window.location.href = "owner-login.html";
     return;
   }
 
-  const user = session.user;
+  const user = data.session.user;
 
-  const fullName =
+  const name =
     user.user_metadata?.full_name ||
+    user.email ||
     "Shop Owner";
 
   document.getElementById("welcome").textContent =
-    "স্বাগতম, " + fullName + " 👋";
+    "স্বাগতম, " + name + " 👋";
 
-  /* নিজের profile তথ্য যাচাই */
-  const { data: profile } =
-    await window.supabaseClient
-      .from("profiles")
-      .select("full_name,mobile,email,status,role")
-      .eq("id", user.id)
-      .maybeSingle();
+  try{
 
-  if(profile){
+    const { data: profile } =
+      await window.supabaseClient
+        .from("profiles")
+        .select("full_name,status")
+        .eq("id", user.id)
+        .maybeSingle();
 
-    if(profile.status && profile.status !== "active"){
+    if(profile){
+
+      const profileName =
+        profile.full_name || name;
+
       document.getElementById("welcome").textContent =
-        "আপনার অ্যাকাউন্ট বর্তমানে সক্রিয় নয়।";
+        "স্বাগতম, " + profileName + " 👋";
     }
 
+    const { data: shop } =
+      await window.supabaseClient
+        .from("shops")
+        .select("id,name")
+        .eq("owner_id", user.id)
+        .maybeSingle();
+
+    if(shop){
+
+      document.getElementById("shopStatus").textContent =
+        shop.name
+          ? "আপনার দোকান: " + shop.name
+          : "দোকানের তথ্য সম্পন্ন করুন।";
+
+    }else{
+
+      document.getElementById("shopStatus").textContent =
+        "দোকানের তথ্য এখনো যোগ করা হয়নি।";
+    }
+
+  }catch(err){
+
+    console.error("Dashboard data error:",err);
   }
 }
 
 
-/* Logout */
-document.getElementById("logout").addEventListener("click", async function(){
+document.getElementById("logout")
+.addEventListener("click", async function(){
 
-  if(window.supabaseClient){
+  const { error } =
     await window.supabaseClient.auth.signOut();
+
+  if(!error){
+    window.location.href = "owner-login.html";
+  }else{
+    alert("লগআউট করা যায়নি। আবার চেষ্টা করুন।");
   }
 
-  window.location.href = "owner-login.html";
 });
 
 
