@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B6E4F">
 <title>My Shop - Ruhia Upazila Bazar</title>
+
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -25,6 +27,7 @@ body{
   border-radius:22px;
   padding:22px;
   margin-bottom:18px;
+  box-shadow:0 8px 25px rgba(11,110,79,.15);
 }
 
 .header h1{
@@ -34,7 +37,7 @@ body{
 
 .header p{
   margin:0;
-  opacity:.9;
+  opacity:.92;
 }
 
 .form-card{
@@ -64,6 +67,7 @@ textarea{
   border-radius:12px;
   font-size:16px;
   background:#fff;
+  color:#19352b;
 }
 
 textarea{
@@ -97,8 +101,9 @@ button{
   cursor:pointer;
 }
 
-button:hover{
-  background:#095b42;
+button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
 }
 
 .msg{
@@ -136,6 +141,10 @@ button:hover{
   line-height:1.6;
 }
 
+.required{
+  color:#d93025;
+}
+
 @media(min-width:650px){
   .grid{
     grid-template-columns:1fr 1fr;
@@ -148,160 +157,235 @@ button:hover{
 
 <main class="shop-page">
 
-  <section class="header">
-    <h1>🏪 My Shop</h1>
-    <p>আপনার ব্যবসার তথ্য যোগ ও পরিচালনা করুন</p>
-  </section>
+<section class="header">
+  <h1>🏪 My Shop</h1>
+  <p>আপনার ব্যবসার তথ্য যোগ ও পরিচালনা করুন</p>
+</section>
 
-  <section class="form-card">
+<section class="form-card">
 
-    <form id="shopForm">
+<form id="shopForm">
 
-      <div class="field">
-        <label>দোকানের নাম *</label>
-        <input
-          id="shopName"
-          required
-          placeholder="আপনার দোকানের নাম"
-        >
-      </div>
+<div class="field">
+  <label>
+    দোকানের নাম <span class="required">*</span>
+  </label>
 
-      <div class="field">
-        <label>ক্যাটাগরি *</label>
-        <select id="category" required>
-          <option value="">ক্যাটাগরি নির্বাচন করুন</option>
-          <option>মুদিখানা</option>
-          <option>পোশাক ও ফ্যাশন</option>
-          <option>জুতা ও ব্যাগ</option>
-          <option>কসমেটিকস</option>
-          <option>জুয়েলারি</option>
-          <option>মোবাইল ও কম্পিউটার</option>
-          <option>ইলেকট্রনিক্স</option>
-          <option>রেস্টুরেন্ট ও খাবার</option>
-          <option>বেকারি ও মিষ্টি</option>
-          <option>ফার্মেসি</option>
-          <option>ডাক্তার ও ক্লিনিক</option>
-          <option>বিউটি ও সেলুন</option>
-          <option>শিক্ষা</option>
-          <option>কোচিং সেন্টার</option>
-          <option>সার্ভিসেস</option>
-          <option>প্রিন্টিং ও ফটোকপি</option>
-          <option>ফটোগ্রাফি ও স্টুডিও</option>
-          <option>হার্ডওয়্যার ও নির্মাণ সামগ্রী</option>
-          <option>ফার্নিচার</option>
-          <option>অটো, গাড়ি ও পরিবহন</option>
-          <option>বাইক/গাড়ির পার্টস ও সার্ভিস</option>
-          <option>কৃষি ও কৃষি সামগ্রী</option>
-          <option>গবাদিপশু ও পোলট্রি</option>
-          <option>জমি, বাড়ি ও রিয়েল এস্টেট</option>
-          <option>ব্যবসায়িক ও পেশাগত সেবা</option>
-          <option>ইভেন্ট ও ডেকোরেশন</option>
-          <option>হোম সার্ভিস</option>
-        </select>
-      </div>
+  <input
+    id="shopName"
+    type="text"
+    required
+    maxlength="150"
+    autocomplete="organization"
+    placeholder="আপনার দোকানের নাম"
+  >
+</div>
 
-      <div class="grid">
 
-        <div class="field">
-          <label>মোবাইল নম্বর *</label>
-          <input
-            id="phone"
-            required
-            inputmode="tel"
-            placeholder="01XXXXXXXXX"
-          >
-        </div>
+<div class="field">
+  <label>
+    ক্যাটাগরি <span class="required">*</span>
+  </label>
 
-        <div class="field">
-          <label>WhatsApp নম্বর</label>
-          <input
-            id="whatsapp"
-            inputmode="tel"
-            placeholder="01XXXXXXXXX"
-          >
-        </div>
+  <select id="category" required>
 
-      </div>
+    <option value="">ক্যাটাগরি নির্বাচন করুন</option>
 
-      <div class="field">
-        <label>ঠিকানা *</label>
-        <input
-          id="address"
-          required
-          placeholder="যেমন: কলেজ রোড, রুহিয়া"
-        >
-      </div>
+    <option value="মুদিখানা">🛒 মুদিখানা</option>
+    <option value="পোশাক ও ফ্যাশন">👗 পোশাক ও ফ্যাশন</option>
+    <option value="জুতা ও ব্যাগ">👞 জুতা ও ব্যাগ</option>
+    <option value="কসমেটিকস">💄 কসমেটিকস</option>
+    <option value="জুয়েলারি">💍 জুয়েলারি</option>
+    <option value="মোবাইল ও কম্পিউটার">📱 মোবাইল ও কম্পিউটার</option>
+    <option value="ইলেকট্রনিক্স">💻 ইলেকট্রনিক্স</option>
+    <option value="রেস্টুরেন্ট ও খাবার">🍲 রেস্টুরেন্ট ও খাবার</option>
+    <option value="বেকারি ও মিষ্টি">🧁 বেকারি ও মিষ্টি</option>
+    <option value="ফার্মেসি">💊 ফার্মেসি</option>
+    <option value="ডাক্তার ও ক্লিনিক">🩺 ডাক্তার ও ক্লিনিক</option>
+    <option value="বিউটি ও সেলুন">💇 বিউটি ও সেলুন</option>
+    <option value="শিক্ষা">📚 শিক্ষা</option>
+    <option value="কোচিং সেন্টার">🎓 কোচিং সেন্টার</option>
+    <option value="সার্ভিসেস">🛠️ সার্ভিসেস</option>
+    <option value="প্রিন্টিং ও ফটোকপি">🖨️ প্রিন্টিং ও ফটোকপি</option>
+    <option value="ফটোগ্রাফি ও স্টুডিও">📸 ফটোগ্রাফি ও স্টুডিও</option>
+    <option value="হার্ডওয়্যার ও নির্মাণ সামগ্রী">🔧 হার্ডওয়্যার ও নির্মাণ সামগ্রী</option>
+    <option value="ফার্নিচার">🪑 ফার্নিচার</option>
+    <option value="অটো, গাড়ি ও পরিবহন">🚗 অটো, গাড়ি ও পরিবহন</option>
+    <option value="বাইক/গাড়ির পার্টস ও সার্ভিস">🏍️ বাইক/গাড়ির পার্টস ও সার্ভিস</option>
+    <option value="কৃষি ও কৃষি সামগ্রী">🌾 কৃষি ও কৃষি সামগ্রী</option>
+    <option value="গবাদিপশু ও পোলট্রি">🐄 গবাদিপশু ও পোলট্রি</option>
+    <option value="জমি, বাড়ি ও রিয়েল এস্টেট">🏠 জমি, বাড়ি ও রিয়েল এস্টেট</option>
+    <option value="ব্যবসায়িক ও পেশাগত সেবা">💼 ব্যবসায়িক ও পেশাগত সেবা</option>
+    <option value="ইভেন্ট ও ডেকোরেশন">🎉 ইভেন্ট ও ডেকোরেশন</option>
+    <option value="হোম সার্ভিস">🧹 হোম সার্ভিস</option>
 
-      <div class="field">
-        <label>দোকানের বিস্তারিত</label>
-        <textarea
-          id="description"
-          placeholder="আপনার দোকান বা ব্যবসা সম্পর্কে লিখুন..."
-        ></textarea>
-      </div>
+  </select>
+</div>
 
-      <div class="grid">
 
-        <div class="field">
-          <label>খোলার সময়</label>
-          <input
-            id="opening"
-            type="time"
-          >
-        </div>
+<div class="grid">
 
-        <div class="field">
-          <label>বন্ধের সময়</label>
-          <input
-            id="closing"
-            type="time"
-          >
-        </div>
+  <div class="field">
+    <label>
+      মোবাইল নম্বর <span class="required">*</span>
+    </label>
 
-      </div>
+    <input
+      id="mobile"
+      type="tel"
+      required
+      inputmode="tel"
+      maxlength="11"
+      autocomplete="tel"
+      placeholder="01XXXXXXXXX"
+    >
+  </div>
 
-      <div class="field">
-        <label>Google Maps Link</label>
-        <input
-          id="mapUrl"
-          type="url"
-          placeholder="https://maps.google.com/..."
-        >
-      </div>
 
-      <p class="note">
-        ⭐ দোকানের তথ্য সঠিকভাবে দিন। পরবর্তীতে এই তথ্য আপনার
-        পাবলিক Shop Profile-এ দেখানো হবে।
-      </p>
+  <div class="field">
+    <label>WhatsApp নম্বর</label>
 
-      <button type="submit">
-        💾 দোকানের তথ্য সংরক্ষণ করুন
-      </button>
+    <input
+      id="whatsapp"
+      type="tel"
+      inputmode="tel"
+      maxlength="11"
+      autocomplete="tel"
+      placeholder="01XXXXXXXXX"
+    >
+  </div>
 
-    </form>
+</div>
 
-    <div id="msg" class="msg"></div>
 
-    <a class="back" href="owner-dashboard.html">
-      ← Dashboard-এ ফিরে যান
-    </a>
+<div class="field">
+  <label>
+    ঠিকানা <span class="required">*</span>
+  </label>
 
-  </section><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <input
+    id="address"
+    type="text"
+    required
+    maxlength="250"
+    autocomplete="street-address"
+    placeholder="যেমন: কলেজ রোড, রুহিয়া"
+  >
+</div>
+
+
+<div class="field">
+  <label>এলাকা / লোকালিটি</label>
+
+  <input
+    id="locality"
+    type="text"
+    maxlength="100"
+    placeholder="যেমন: কলেজ রোড / হাজী মার্কেট / স্টেশন রোড"
+  >
+</div>
+
+
+<div class="field">
+  <label>দোকানের বিস্তারিত</label>
+
+  <textarea
+    id="description"
+    maxlength="1000"
+    placeholder="আপনার দোকান বা ব্যবসা সম্পর্কে লিখুন..."
+  ></textarea>
+</div>
+
+
+<div class="grid">
+
+  <div class="field">
+    <label>খোলার সময়</label>
+
+    <input
+      id="opening"
+      type="time"
+    >
+  </div>
+
+
+  <div class="field">
+    <label>বন্ধের সময়</label>
+
+    <input
+      id="closing"
+      type="time"
+    >
+  </div>
+
+</div>
+
+
+<div class="field">
+  <label>Google Maps Link</label>
+
+  <input
+    id="mapUrl"
+    type="url"
+    maxlength="500"
+    placeholder="https://maps.google.com/..."
+  >
+</div>
+
+
+<p class="note">
+  ⭐ দোকানের তথ্য সঠিকভাবে দিন। সংরক্ষণ করার পর এই তথ্য আপনার
+  পাবলিক Shop Profile-এ দেখানো হবে।
+</p>
+
+
+<button id="saveBtn" type="submit">
+  💾 দোকানের তথ্য সংরক্ষণ করুন
+</button>
+
+</form>
+
+<div id="msg" class="msg"></div>
+
+<a class="back" href="owner-dashboard.html">
+  ← Dashboard-এ ফিরে যান
+</a>
+
+</section>
+
+</main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 
 <script>
 const form = document.getElementById("shopForm");
 const msg = document.getElementById("msg");
+const saveBtn = document.getElementById("saveBtn");
+
+let currentShopId = null;
+
 
 function showMessage(text, type) {
   msg.textContent = text;
   msg.className = "msg " + type;
 }
 
+
+function validBDMobile(number) {
+  return /^01[3-9]\d{8}$/.test(number);
+}
+
+
+/* =========================
+   LOAD OWNER'S SHOP
+========================= */
+
 async function loadShop() {
 
   if (!window.supabaseClient) {
-    showMessage("Supabase সংযোগ পাওয়া যাচ্ছে না।", "err");
+    showMessage(
+      "Supabase সংযোগ পাওয়া যাচ্ছে না।",
+      "err"
+    );
     return;
   }
 
@@ -310,204 +394,487 @@ async function loadShop() {
     error: sessionError
   } = await window.supabaseClient.auth.getSession();
 
+
   if (sessionError || !session) {
     window.location.href = "owner-login.html";
     return;
   }
 
+
   const userId = session.user.id;
 
-  const { data: shop, error } =
-    await window.supabaseClient
-      .from("shops")
-      .select("*")
-      .eq("owner_id", userId)
-      .maybeSingle();
+
+  const {
+    data: shop,
+    error
+  } = await window.supabaseClient
+    .from("shops")
+    .select("*")
+    .eq("owner_id", userId)
+    .maybeSingle();
+
 
   if (error) {
-    console.error(error);
+
+    console.error("Shop load error:", error);
+
+    showMessage(
+      "দোকানের তথ্য লোড করা যায়নি।",
+      "err"
+    );
+
     return;
   }
+
 
   if (!shop) {
     return;
   }
 
+
+  /* Database-এর আসল column অনুযায়ী */
+
+  currentShopId = shop.id;
+
+
   document.getElementById("shopName").value =
-    shop.name || "";
+    shop.shop_name || "";
+
 
   document.getElementById("category").value =
     shop.category || "";
 
-  document.getElementById("phone").value =
-    shop.phone || "";
+
+  document.getElementById("mobile").value =
+    shop.mobile || "";
+
 
   document.getElementById("whatsapp").value =
     shop.whatsapp || "";
 
+
   document.getElementById("address").value =
     shop.address || "";
+
+
+  document.getElementById("locality").value =
+    shop.locality || "";
+
 
   document.getElementById("description").value =
     shop.description || "";
 
+
   document.getElementById("mapUrl").value =
     shop.map_url || "";
 
+
+  /* Opening / Closing time */
+
   if (shop.opening_hours) {
-    const parts = shop.opening_hours.split("-");
+
+    const parts =
+      shop.opening_hours.split("-");
+
+
     if (parts.length === 2) {
+
       document.getElementById("opening").value =
         parts[0].trim();
 
+
       document.getElementById("closing").value =
         parts[1].trim();
+
     }
   }
 }
 
 
-form.addEventListener("submit", async function(e) {
+/* =========================
+   SAVE SHOP
+========================= */
 
-  e.preventDefault();
+form.addEventListener(
+  "submit",
+  async function(e) {
 
-  if (!window.supabaseClient) {
-    showMessage("Supabase সংযোগ পাওয়া যাচ্ছে না।", "err");
-    return;
+    e.preventDefault();
+
+
+    if (!window.supabaseClient) {
+
+      showMessage(
+        "Supabase সংযোগ পাওয়া যাচ্ছে না।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    const {
+      data: { session }
+    } = await window.supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+      window.location.href =
+        "owner-login.html";
+
+      return;
+    }
+
+
+    const userId = session.user.id;
+
+
+    /* Form values */
+
+    const shopName =
+      document
+        .getElementById("shopName")
+        .value
+        .trim();
+
+
+    const category =
+      document
+        .getElementById("category")
+        .value;
+
+
+    const mobile =
+      document
+        .getElementById("mobile")
+        .value
+        .trim();
+
+
+    const whatsapp =
+      document
+        .getElementById("whatsapp")
+        .value
+        .trim();
+
+
+    const address =
+      document
+        .getElementById("address")
+        .value
+        .trim();
+
+
+    const locality =
+      document
+        .getElementById("locality")
+        .value
+        .trim();
+
+
+    const description =
+      document
+        .getElementById("description")
+        .value
+        .trim();
+
+
+    const opening =
+      document
+        .getElementById("opening")
+        .value;
+
+
+    const closing =
+      document
+        .getElementById("closing")
+        .value;
+
+
+    const mapUrl =
+      document
+        .getElementById("mapUrl")
+        .value
+        .trim();
+
+
+    /* Validation */
+
+    if (!shopName) {
+
+      showMessage(
+        "দোকানের নাম দিন।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    if (!category) {
+
+      showMessage(
+        "একটি ক্যাটাগরি নির্বাচন করুন।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    if (!validBDMobile(mobile)) {
+
+      showMessage(
+        "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    if (
+      whatsapp &&
+      !validBDMobile(whatsapp)
+    ) {
+
+      showMessage(
+        "সঠিক WhatsApp নম্বর দিন।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    if (!address) {
+
+      showMessage(
+        "দোকানের ঠিকানা দিন।",
+        "err"
+      );
+
+      return;
+    }
+
+
+    /* Opening hours */
+
+    let openingHours = null;
+
+
+    if (opening && closing) {
+
+      openingHours =
+        opening + " - " + closing;
+
+    } else if (opening) {
+
+      openingHours = opening;
+
+    } else if (closing) {
+
+      openingHours = closing;
+
+    }
+
+
+    /* =========================
+       DATABASE DATA
+    ========================= */
+
+    const shopData = {
+
+      owner_id: userId,
+
+      shop_name: shopName,
+
+      category: category,
+
+      mobile: mobile,
+
+      whatsapp:
+        whatsapp || null,
+
+      address: address,
+
+      locality:
+        locality || null,
+
+      description:
+        description || null,
+
+      opening_hours:
+        openingHours,
+
+      map_url:
+        mapUrl || null
+
+    };
+
+
+    /* Button loading */
+
+    saveBtn.disabled = true;
+
+    saveBtn.textContent =
+      "⏳ সংরক্ষণ হচ্ছে...";
+
+
+    try {
+
+      let result;
+
+
+      /* =========================
+         UPDATE EXISTING SHOP
+      ========================= */
+
+      if (currentShopId) {
+
+        result =
+          await window.supabaseClient
+            .from("shops")
+            .update(shopData)
+            .eq("id", currentShopId)
+            .eq("owner_id", userId);
+
+
+      }
+
+      /* =========================
+         CHECK EXISTING SHOP
+      ========================= */
+
+      else {
+
+        const {
+          data: existingShop,
+          error: checkError
+        } =
+          await window.supabaseClient
+            .from("shops")
+            .select("id")
+            .eq("owner_id", userId)
+            .maybeSingle();
+
+
+        if (checkError) {
+          throw checkError;
+        }
+
+
+        /* Existing shop found */
+
+        if (existingShop) {
+
+          currentShopId =
+            existingShop.id;
+
+
+          result =
+            await window.supabaseClient
+              .from("shops")
+              .update(shopData)
+              .eq(
+                "id",
+                existingShop.id
+              )
+              .eq(
+                "owner_id",
+                userId
+              );
+
+        }
+
+        /* New shop */
+
+        else {
+
+          result =
+            await window.supabaseClient
+              .from("shops")
+              .insert(shopData)
+              .select("id")
+              .single();
+
+
+          if (
+            result.data &&
+            result.data.id
+          ) {
+
+            currentShopId =
+              result.data.id;
+
+          }
+
+        }
+
+      }
+
+
+      /* Database error */
+
+      if (result.error) {
+
+        console.error(
+          "Shop save error:",
+          result.error
+        );
+
+        showMessage(
+          result.error.message ||
+          "দোকানের তথ্য সংরক্ষণ করা যায়নি।",
+          "err"
+        );
+
+        return;
+      }
+
+
+      /* Success */
+
+      showMessage(
+        "✅ দোকানের তথ্য সফলভাবে সংরক্ষণ হয়েছে।",
+        "ok"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Unexpected error:",
+        error
+      );
+
+
+      showMessage(
+        error.message ||
+        "একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+        "err"
+      );
+
+
+    } finally {
+
+      saveBtn.disabled = false;
+
+      saveBtn.textContent =
+        "💾 দোকানের তথ্য সংরক্ষণ করুন";
+
+    }
+
   }
-
-  const {
-    data: { session }
-  } = await window.supabaseClient.auth.getSession();
-
-  if (!session) {
-    window.location.href = "owner-login.html";
-    return;
-  }
-
-  const userId = session.user.id;
-
-  const shopName =
-    document.getElementById("shopName").value.trim();
-
-  const category =
-    document.getElementById("category").value;
-
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const whatsapp =
-    document.getElementById("whatsapp").value.trim();
-
-  const address =
-    document.getElementById("address").value.trim();
-
-  const description =
-    document.getElementById("description").value.trim();
-
-  const opening =
-    document.getElementById("opening").value;
-
-  const closing =
-    document.getElementById("closing").value;
-
-  const mapUrl =
-    document.getElementById("mapUrl").value.trim();
+);
 
 
-  if (!/^01[3-9]\d{8}$/.test(phone)) {
-    showMessage(
-      "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।",
-      "err"
-    );
-    return;
-  }
-
-  if (
-    whatsapp &&
-    !/^01[3-9]\d{8}$/.test(whatsapp)
-  ) {
-    showMessage(
-      "সঠিক WhatsApp নম্বর দিন।",
-      "err"
-    );
-    return;
-  }
-
-
-  const openingHours =
-    opening && closing
-      ? opening + " - " + closing
-      : "";
-
-
-  const shopData = {
-    owner_id: userId,
-    name: shopName,
-    category: category,
-    phone: phone,
-    whatsapp: whatsapp || null,
-    address: address,
-    description: description || null,
-    opening_hours: openingHours || null,
-    map_url: mapUrl || null
-  };
-
-
-  const { data: existingShop } =
-    await window.supabaseClient
-      .from("shops")
-      .select("id")
-      .eq("owner_id", userId)
-      .maybeSingle();
-
-
-  let result;
-
-
-  if (existingShop) {
-
-    result =
-      await window.supabaseClient
-        .from("shops")
-        .update(shopData)
-        .eq("id", existingShop.id);
-
-  } else {
-
-    result =
-      await window.supabaseClient
-        .from("shops")
-        .insert(shopData);
-
-  }
-
-
-  if (result.error) {
-    console.error(result.error);
-
-    showMessage(
-      result.error.message ||
-      "দোকানের তথ্য সংরক্ষণ করা যায়নি।",
-      "err"
-    );
-
-    return;
-  }
-
-
-  showMessage(
-    "✅ দোকানের তথ্য সফলভাবে সংরক্ষণ হয়েছে।",
-    "ok"
-  );
-
-});
-
+/* Page load */
 
 loadShop();
+
 </script>
 
 </body>
 </html>
-
-</main>
