@@ -1,20 +1,44 @@
 <!doctype html>
 <html lang="bn">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Owner Dashboard - Ruhia Upazila Bazar</title>
-<link rel="stylesheet" href="style.css">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<meta
+  name="theme-color"
+  content="#0B6E4F"
+>
+
+<title>
+  Owner Dashboard - Ruhia Upazila Bazar
+</title>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
 
 <style>
+
 body{
   margin:0;
-  background:linear-gradient(135deg,#eef8f3,#fff8e8);
+  background:
+    linear-gradient(
+      135deg,
+      #eef8f3,
+      #fff8e8
+    );
   color:#19352b;
 }
 
 .dashboard{
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
   padding:18px;
 }
@@ -25,7 +49,9 @@ body{
   border-radius:22px;
   padding:22px;
   margin-bottom:18px;
-  box-shadow:0 8px 25px rgba(11,110,79,.15);
+  box-shadow:
+    0 8px 25px
+    rgba(11,110,79,.15);
 }
 
 .topbar h1{
@@ -36,272 +62,787 @@ body{
 .topbar p{
   margin:0;
   opacity:.92;
+  font-size:15px;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-bottom:18px;
-}
-
-.card{
+.shop-card{
   background:#fff;
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 6px 22px rgba(0,0,0,.06);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:
+    0 8px 28px
+    rgba(0,0,0,.07);
 }
 
-.card h3{
+.shop-card h2{
   margin:0 0 8px;
+  font-size:21px;
+}
+
+.shop-name{
+  font-size:19px;
+  font-weight:800;
   color:#0B6E4F;
+  margin:5px 0;
 }
 
-.card p{
-  margin:0;
-  color:#65736d;
-  line-height:1.6;
+.shop-meta{
+  color:#68766f;
+  font-size:14px;
+  line-height:1.7;
 }
 
-.menu{
+.no-shop{
+  color:#68766f;
+  line-height:1.7;
+}
+
+.dashboard-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
   gap:12px;
 }
 
-.menu a{
-  display:block;
+.dashboard-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:72px;
+  padding:15px;
+  box-sizing:border-box;
   background:#fff;
   color:#19352b;
   text-decoration:none;
   border-radius:16px;
-  padding:18px;
-  box-shadow:0 5px 18px rgba(0,0,0,.05);
-  font-weight:700;
+  font-weight:800;
+  box-shadow:
+    0 6px 20px
+    rgba(0,0,0,.06);
   transition:.2s;
 }
 
-.menu a:active{
-  transform:scale(.98);
+.dashboard-link:hover{
+  transform:translateY(-2px);
 }
 
-.menu a span{
-  display:block;
+.dashboard-link span{
   font-size:25px;
-  margin-bottom:7px;
 }
 
 .logout{
-  margin-top:18px;
   width:100%;
-  border:0;
-  border-radius:12px;
+  margin-top:18px;
   padding:14px;
-  background:#d93025;
+  border:0;
+  border-radius:13px;
+  background:#c62828;
   color:#fff;
   font-size:16px;
-  font-weight:700;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.home{
+.logout:hover{
+  background:#a91f1f;
+}
+
+.back{
   display:block;
   text-align:center;
-  margin-top:15px;
+  margin-top:18px;
   color:#0B6E4F;
   text-decoration:none;
+  font-weight:800;
+}
+
+.status{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#fff4d6;
+  color:#8a5a00;
+  font-size:13px;
   font-weight:700;
 }
 
-@media(min-width:700px){
-  .cards{
-    grid-template-columns:repeat(4,1fr);
+.loading{
+  color:#68766f;
+}
+
+@media(max-width:520px){
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
   }
 
-  .menu{
-    grid-template-columns:repeat(4,1fr);
+  .dashboard{
+    padding:14px;
   }
+
+  .topbar{
+    padding:20px;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <main class="dashboard">
 
+
+  <!-- TOP -->
+
   <section class="topbar">
-    <h1>Shop Owner Dashboard</h1>
-    <p id="welcome">আপনার ব্যবসা পরিচালনা করুন</p>
+
+    <h1>
+      Shop Owner Dashboard
+    </h1>
+
+    <p id="welcome">
+      আপনার ব্যবসা পরিচালনা করুন
+    </p>
+
   </section>
 
-  <section class="cards">
 
-    <div class="card">
-      <h3>🏪 আমার দোকান</h3>
-      <p id="shopStatus">
-        দোকানের তথ্য এখনো যোগ করা হয়নি।
-      </p>
-    </div>
+  <!-- SHOP -->
 
-    <div class="card">
-      <h3>📦 পণ্য / সার্ভিস</h3>
-      <p>
-        আপনার পণ্য ও সার্ভিস পরিচালনা করুন।
-      </p>
-    </div>
+  <section class="shop-card">
 
-    <div class="card">
-      <h3>🎁 অফার</h3>
-      <p>
-        আপনার ব্যবসার অফার তৈরি ও পরিচালনা করুন।
-      </p>
-    </div>
+    <h2>
+      🏪 আমার দোকান
+    </h2>
 
-    <div class="card">
-      <h3>💳 প্যাকেজ</h3>
-      <p>
-        Promotion Package ও পেমেন্টের তথ্য দেখুন।
+    <div id="shopInfo">
+
+      <p class="loading">
+        দোকানের তথ্য লোড হচ্ছে...
       </p>
+
     </div>
 
   </section>
 
-  <section class="menu">
 
-    <a href="owner-shop.html">
+  <!-- MENU -->
+
+  <section class="dashboard-grid">
+
+
+    <a
+      class="dashboard-link"
+      href="owner-shop.html"
+    >
+
       <span>🏪</span>
-      My Shop
+
+      <div>
+        My Shop
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'📸 Photos')"
+    >
+
       <span>📸</span>
-      Photos
+
+      <div>
+        Photos
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'📦 Products / Services')"
+    >
+
       <span>📦</span>
-      Products / Services
+
+      <div>
+        Products / Services
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'🎁 Offers')"
+    >
+
       <span>🎁</span>
-      Offers
+
+      <div>
+        Offers
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'🚀 Promotion')"
+    >
+
       <span>🚀</span>
-      Promotion
+
+      <div>
+        Promotion
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'💳 My Package')"
+    >
+
       <span>💳</span>
-      My Package
+
+      <div>
+        My Package
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'💰 Payments')"
+    >
+
       <span>💰</span>
-      Payments
+
+      <div>
+        Payments
+      </div>
+
     </a>
 
-    <a href="#">
+
+    <a
+      class="dashboard-link"
+      href="#"
+      onclick="comingSoon(event,'📊 Analytics')"
+    >
+
       <span>📊</span>
-      Analytics
+
+      <div>
+        Analytics
+      </div>
+
     </a>
+
 
   </section>
 
-  <button class="logout" id="logout">
-    লগআউট
+
+  <!-- LOGOUT -->
+
+  <button
+    id="logout"
+    class="logout"
+    type="button"
+  >
+    🚪 লগআউট
   </button>
 
-  <a class="home" href="index.html">
+
+  <a
+    class="back"
+    href="index.html"
+  >
     ← মূল ওয়েবসাইটে ফিরে যান
   </a>
+
 
 </main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 
 <script>
-async function loadDashboard(){
 
-  const { data, error } =
-    await window.supabaseClient.auth.getSession();
+/* =========================
+   COMING SOON
+========================= */
 
-  if(error || !data.session){
-    window.location.href = "owner-login.html";
-    return;
-  }
+function comingSoon(event, name) {
 
-  const user = data.session.user;
+  event.preventDefault();
 
-  const name =
-    user.user_metadata?.full_name ||
-    user.email ||
-    "Shop Owner";
+  alert(
+    name +
+    " ফিচারটি পরবর্তী ধাপে চালু হবে।"
+  );
 
-  document.getElementById("welcome").textContent =
-    "স্বাগতম, " + name + " 👋";
-
-  try{
-
-    const { data: profile } =
-      await window.supabaseClient
-        .from("profiles")
-        .select("full_name,status")
-        .eq("id", user.id)
-        .maybeSingle();
-
-    if(profile){
-
-      const profileName =
-        profile.full_name || name;
-
-      document.getElementById("welcome").textContent =
-        "স্বাগতম, " + profileName + " 👋";
-    }
-
-    const { data: shop } =
-      await window.supabaseClient
-        .from("shops")
-        .select("id,name")
-        .eq("owner_id", user.id)
-        .maybeSingle();
-
-    if(shop){
-
-      document.getElementById("shopStatus").textContent =
-        shop.name
-          ? "আপনার দোকান: " + shop.name
-          : "দোকানের তথ্য সম্পন্ন করুন।";
-
-    }else{
-
-      document.getElementById("shopStatus").textContent =
-        "দোকানের তথ্য এখনো যোগ করা হয়নি।";
-    }
-
-  }catch(err){
-
-    console.error("Dashboard data error:",err);
-  }
 }
 
 
-document.getElementById("logout")
-.addEventListener("click", async function(){
+/* =========================
+   LOAD DASHBOARD
+========================= */
 
-  const { error } =
-    await window.supabaseClient.auth.signOut();
+async function loadDashboard() {
 
-  if(!error){
-    window.location.href = "owner-login.html";
-  }else{
-    alert("লগআউট করা যায়নি। আবার চেষ্টা করুন।");
+  if (!window.supabaseClient) {
+
+    document.getElementById(
+      "shopInfo"
+    ).innerHTML =
+      '<p class="no-shop">Supabase সংযোগ পাওয়া যাচ্ছে না।</p>';
+
+    return;
+
   }
 
-});
 
+  /* =========================
+     SESSION
+  ========================= */
+
+  const {
+    data: { session },
+    error: sessionError
+  } =
+    await window.supabaseClient
+      .auth
+      .getSession();
+
+
+  if (
+    sessionError ||
+    !session
+  ) {
+
+    window.location.href =
+      "owner-login.html";
+
+    return;
+
+  }
+
+
+  const user =
+    session.user;
+
+
+  /* =========================
+     OWNER NAME
+  ========================= */
+
+  let ownerName =
+    user.user_metadata?.full_name ||
+    "";
+
+
+  try {
+
+    const {
+      data: profile,
+      error: profileError
+    } =
+      await window.supabaseClient
+        .from("profiles")
+        .select(
+          "full_name,status"
+        )
+        .eq(
+          "id",
+          user.id
+        )
+        .maybeSingle();
+
+
+    if (
+      !profileError &&
+      profile
+    ) {
+
+      ownerName =
+        profile.full_name ||
+        ownerName;
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Profile error:",
+      error
+    );
+
+  }
+
+
+  if (!ownerName) {
+
+    ownerName =
+      user.email ||
+      "Shop Owner";
+
+  }
+
+
+  document.getElementById(
+    "welcome"
+  ).textContent =
+    "স্বাগতম, " +
+    ownerName +
+    " 👋";
+
+
+  /* =========================
+     LOAD SHOP
+  ========================= */
+
+  try {
+
+    const {
+      data: shop,
+      error: shopError
+    } =
+      await window.supabaseClient
+        .from("shops")
+        .select(
+          "id,shop_name,category,mobile,whatsapp,address,locality,status,package_type,package_expires_at,featured"
+        )
+        .eq(
+          "owner_id",
+          user.id
+        )
+        .maybeSingle();
+
+
+    if (shopError) {
+
+      console.error(
+        "Shop error:",
+        shopError
+      );
+
+
+      document.getElementById(
+        "shopInfo"
+      ).innerHTML =
+        '<p class="no-shop">দোকানের তথ্য লোড করা যায়নি।</p>';
+
+      return;
+
+    }
+
+
+    /* =========================
+       NO SHOP
+    ========================= */
+
+    if (!shop) {
+
+      document.getElementById(
+        "shopInfo"
+      ).innerHTML = `
+
+        <p class="no-shop">
+          দোকানের তথ্য এখনো যোগ করা হয়নি।
+        </p>
+
+        <a
+          href="owner-shop.html"
+          style="
+            display:inline-block;
+            margin-top:8px;
+            color:#0B6E4F;
+            font-weight:800;
+            text-decoration:none;
+          "
+        >
+          ➕ এখনই দোকানের তথ্য যোগ করুন
+        </a>
+
+      `;
+
+      return;
+
+    }
+
+
+    /* =========================
+       SHOP STATUS
+    ========================= */
+
+    let statusText =
+      shop.status ||
+      "Pending";
+
+
+    let statusLabel =
+      "স্ট্যাটাস: " +
+      statusText;
+
+
+    if (
+      statusText.toLowerCase() ===
+      "active"
+    ) {
+
+      statusLabel =
+        "স্ট্যাটাস: Active";
+
+    }
+
+
+    /* =========================
+       PACKAGE
+    ========================= */
+
+    let packageText =
+      shop.package_type ||
+      "Package নির্বাচন করা হয়নি";
+
+
+    /* =========================
+       EXPIRY
+    ========================= */
+
+    let expiryText =
+      "";
+
+
+    if (
+      shop.package_expires_at
+    ) {
+
+      const date =
+        new Date(
+          shop.package_expires_at
+        );
+
+
+      if (
+        !Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        expiryText =
+          "প্যাকেজ শেষ হবে: " +
+          date.toLocaleDateString(
+            "bn-BD"
+          );
+
+      }
+
+    }
+
+
+    /* =========================
+       SHOP INFO
+    ========================= */
+
+    document.getElementById(
+      "shopInfo"
+    ).innerHTML = `
+
+      <div class="shop-name">
+        ${escapeHtml(
+          shop.shop_name || "দোকানের নাম নেই"
+        )}
+      </div>
+
+      <div class="shop-meta">
+
+        📂 ক্যাটাগরি:
+        ${escapeHtml(
+          shop.category || "নির্ধারিত নয়"
+        )}
+
+        <br>
+
+        📱 মোবাইল:
+        ${escapeHtml(
+          shop.mobile || "নেই"
+        )}
+
+        <br>
+
+        📍 ঠিকানা:
+        ${escapeHtml(
+          shop.address || "নেই"
+        )}
+
+        ${
+          shop.locality
+          ? "<br>📌 এলাকা: " +
+            escapeHtml(
+              shop.locality
+            )
+          : ""
+        }
+
+        <br>
+
+        📦 প্যাকেজ:
+        ${escapeHtml(
+          packageText
+        )}
+
+        ${
+          expiryText
+          ? "<br>" +
+            escapeHtml(
+              expiryText
+            )
+          : ""
+        }
+
+      </div>
+
+      <div class="status">
+        ${escapeHtml(
+          statusLabel
+        )}
+      </div>
+
+    `;
+
+
+  } catch (error) {
+
+    console.error(
+      "Dashboard error:",
+      error
+    );
+
+
+    document.getElementById(
+      "shopInfo"
+    ).innerHTML =
+      '<p class="no-shop">দোকানের তথ্য দেখাতে সমস্যা হয়েছে।</p>';
+
+  }
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+  .getElementById("logout")
+  .addEventListener(
+    "click",
+    async function() {
+
+      const button =
+        document.getElementById(
+          "logout"
+        );
+
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "⏳ লগআউট হচ্ছে...";
+
+
+      const {
+        error
+      } =
+        await window.supabaseClient
+          .auth
+          .signOut();
+
+
+      if (error) {
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+
+        alert(
+          "লগআউট করা যায়নি। আবার চেষ্টা করুন।"
+        );
+
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "🚪 লগআউট";
+
+        return;
+
+      }
+
+
+      window.location.href =
+        "owner-login.html";
+
+    }
+  );
+
+
+/* =========================
+   START
+========================= */
 
 loadDashboard();
+
 </script>
 
 </body>
