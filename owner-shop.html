@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="bn">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0B6E4F">
+
 <title>My Shop - Ruhia Upazila Bazar</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
+
 body{
   margin:0;
   background:linear-gradient(135deg,#eef8f3,#fff8e8);
@@ -37,7 +40,7 @@ body{
 
 .header p{
   margin:0;
-  opacity:.92;
+  opacity:.9;
 }
 
 .form-card{
@@ -67,7 +70,6 @@ textarea{
   border-radius:12px;
   font-size:16px;
   background:#fff;
-  color:#19352b;
 }
 
 textarea{
@@ -101,8 +103,12 @@ button{
   cursor:pointer;
 }
 
+button:hover{
+  background:#095b42;
+}
+
 button:disabled{
-  opacity:.65;
+  opacity:.7;
   cursor:not-allowed;
 }
 
@@ -141,15 +147,14 @@ button:disabled{
   line-height:1.6;
 }
 
-.required{
-  color:#d93025;
-}
-
 @media(min-width:650px){
+
   .grid{
     grid-template-columns:1fr 1fr;
   }
+
 }
+
 </style>
 </head>
 
@@ -157,206 +162,275 @@ button:disabled{
 
 <main class="shop-page">
 
-<section class="header">
-  <h1>🏪 My Shop</h1>
-  <p>আপনার ব্যবসার তথ্য যোগ ও পরিচালনা করুন</p>
-</section>
+  <section class="header">
 
-<section class="form-card">
+    <h1>🏪 My Shop</h1>
 
-<form id="shopForm">
+    <p>
+      আপনার ব্যবসার তথ্য যোগ ও পরিচালনা করুন
+    </p>
 
-<div class="field">
-  <label>
-    দোকানের নাম <span class="required">*</span>
-  </label>
-
-  <input
-    id="shopName"
-    type="text"
-    required
-    maxlength="150"
-    autocomplete="organization"
-    placeholder="আপনার দোকানের নাম"
-  >
-</div>
+  </section>
 
 
-<div class="field">
-  <label>
-    ক্যাটাগরি <span class="required">*</span>
-  </label>
+  <section class="form-card">
 
-  <select id="category" required>
-
-    <option value="">ক্যাটাগরি নির্বাচন করুন</option>
-
-    <option value="মুদিখানা">🛒 মুদিখানা</option>
-    <option value="পোশাক ও ফ্যাশন">👗 পোশাক ও ফ্যাশন</option>
-    <option value="জুতা ও ব্যাগ">👞 জুতা ও ব্যাগ</option>
-    <option value="কসমেটিকস">💄 কসমেটিকস</option>
-    <option value="জুয়েলারি">💍 জুয়েলারি</option>
-    <option value="মোবাইল ও কম্পিউটার">📱 মোবাইল ও কম্পিউটার</option>
-    <option value="ইলেকট্রনিক্স">💻 ইলেকট্রনিক্স</option>
-    <option value="রেস্টুরেন্ট ও খাবার">🍲 রেস্টুরেন্ট ও খাবার</option>
-    <option value="বেকারি ও মিষ্টি">🧁 বেকারি ও মিষ্টি</option>
-    <option value="ফার্মেসি">💊 ফার্মেসি</option>
-    <option value="ডাক্তার ও ক্লিনিক">🩺 ডাক্তার ও ক্লিনিক</option>
-    <option value="বিউটি ও সেলুন">💇 বিউটি ও সেলুন</option>
-    <option value="শিক্ষা">📚 শিক্ষা</option>
-    <option value="কোচিং সেন্টার">🎓 কোচিং সেন্টার</option>
-    <option value="সার্ভিসেস">🛠️ সার্ভিসেস</option>
-    <option value="প্রিন্টিং ও ফটোকপি">🖨️ প্রিন্টিং ও ফটোকপি</option>
-    <option value="ফটোগ্রাফি ও স্টুডিও">📸 ফটোগ্রাফি ও স্টুডিও</option>
-    <option value="হার্ডওয়্যার ও নির্মাণ সামগ্রী">🔧 হার্ডওয়্যার ও নির্মাণ সামগ্রী</option>
-    <option value="ফার্নিচার">🪑 ফার্নিচার</option>
-    <option value="অটো, গাড়ি ও পরিবহন">🚗 অটো, গাড়ি ও পরিবহন</option>
-    <option value="বাইক/গাড়ির পার্টস ও সার্ভিস">🏍️ বাইক/গাড়ির পার্টস ও সার্ভিস</option>
-    <option value="কৃষি ও কৃষি সামগ্রী">🌾 কৃষি ও কৃষি সামগ্রী</option>
-    <option value="গবাদিপশু ও পোলট্রি">🐄 গবাদিপশু ও পোলট্রি</option>
-    <option value="জমি, বাড়ি ও রিয়েল এস্টেট">🏠 জমি, বাড়ি ও রিয়েল এস্টেট</option>
-    <option value="ব্যবসায়িক ও পেশাগত সেবা">💼 ব্যবসায়িক ও পেশাগত সেবা</option>
-    <option value="ইভেন্ট ও ডেকোরেশন">🎉 ইভেন্ট ও ডেকোরেশন</option>
-    <option value="হোম সার্ভিস">🧹 হোম সার্ভিস</option>
-
-  </select>
-</div>
+    <form id="shopForm">
 
 
-<div class="grid">
+      <!-- দোকানের নাম -->
 
-  <div class="field">
-    <label>
-      মোবাইল নম্বর <span class="required">*</span>
-    </label>
+      <div class="field">
 
-    <input
-      id="mobile"
-      type="tel"
-      required
-      inputmode="tel"
-      maxlength="11"
-      autocomplete="tel"
-      placeholder="01XXXXXXXXX"
+        <label for="shopName">
+          দোকানের নাম *
+        </label>
+
+        <input
+          id="shopName"
+          type="text"
+          required
+          autocomplete="organization"
+          placeholder="আপনার দোকানের নাম"
+        >
+
+      </div>
+
+
+      <!-- ক্যাটাগরি -->
+
+      <div class="field">
+
+        <label for="category">
+          ক্যাটাগরি *
+        </label>
+
+        <select
+          id="category"
+          required
+        >
+
+          <option value="">
+            ক্যাটাগরি নির্বাচন করুন
+          </option>
+
+          <option>মুদিখানা</option>
+          <option>পোশাক ও ফ্যাশন</option>
+          <option>জুতা ও ব্যাগ</option>
+          <option>কসমেটিকস</option>
+          <option>জুয়েলারি</option>
+          <option>মোবাইল ও কম্পিউটার</option>
+          <option>ইলেকট্রনিক্স</option>
+          <option>রেস্টুরেন্ট ও খাবার</option>
+          <option>বেকারি ও মিষ্টি</option>
+          <option>ফার্মেসি</option>
+          <option>ডাক্তার ও ক্লিনিক</option>
+          <option>বিউটি ও সেলুন</option>
+          <option>শিক্ষা</option>
+          <option>কোচিং সেন্টার</option>
+          <option>সার্ভিসেস</option>
+          <option>প্রিন্টিং ও ফটোকপি</option>
+          <option>ফটোগ্রাফি ও স্টুডিও</option>
+          <option>হার্ডওয়্যার ও নির্মাণ সামগ্রী</option>
+          <option>ফার্নিচার</option>
+          <option>অটো, গাড়ি ও পরিবহন</option>
+          <option>বাইক/গাড়ির পার্টস ও সার্ভিস</option>
+          <option>কৃষি ও কৃষি সামগ্রী</option>
+          <option>গবাদিপশু ও পোলট্রি</option>
+          <option>জমি, বাড়ি ও রিয়েল এস্টেট</option>
+          <option>ব্যবসায়িক ও পেশাগত সেবা</option>
+          <option>ইভেন্ট ও ডেকোরেশন</option>
+          <option>হোম সার্ভিস</option>
+
+        </select>
+
+      </div>
+
+
+      <!-- মোবাইল + WhatsApp -->
+
+      <div class="grid">
+
+        <div class="field">
+
+          <label for="mobile">
+            মোবাইল নম্বর *
+          </label>
+
+          <input
+            id="mobile"
+            type="tel"
+            required
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="01XXXXXXXXX"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="whatsapp">
+            WhatsApp নম্বর
+          </label>
+
+          <input
+            id="whatsapp"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="01XXXXXXXXX"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- ঠিকানা -->
+
+      <div class="field">
+
+        <label for="address">
+          সম্পূর্ণ ঠিকানা *
+        </label>
+
+        <input
+          id="address"
+          type="text"
+          required
+          autocomplete="street-address"
+          placeholder="যেমন: কলেজ রোড, রুহিয়া"
+        >
+
+      </div>
+
+
+      <!-- এলাকা -->
+
+      <div class="field">
+
+        <label for="locality">
+          এলাকা / লোকেশন
+        </label>
+
+        <input
+          id="locality"
+          type="text"
+          placeholder="যেমন: কলেজ রোড / হাজী মার্কেট / স্টেশন রোড"
+        >
+
+      </div>
+
+
+      <!-- বিস্তারিত -->
+
+      <div class="field">
+
+        <label for="description">
+          দোকানের বিস্তারিত
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="আপনার দোকান বা ব্যবসা সম্পর্কে লিখুন..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- সময় -->
+
+      <div class="grid">
+
+        <div class="field">
+
+          <label for="opening">
+            খোলার সময়
+          </label>
+
+          <input
+            id="opening"
+            type="time"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="closing">
+            বন্ধের সময়
+          </label>
+
+          <input
+            id="closing"
+            type="time"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Google Maps -->
+
+      <div class="field">
+
+        <label for="mapUrl">
+          Google Maps Link
+        </label>
+
+        <input
+          id="mapUrl"
+          type="url"
+          placeholder="https://maps.google.com/..."
+        >
+
+      </div>
+
+
+      <p class="note">
+
+        ⭐ দোকানের তথ্য সঠিকভাবে দিন।
+        পরবর্তীতে এই তথ্য আপনার পাবলিক Shop Profile-এ দেখানো হবে।
+
+      </p>
+
+
+      <button
+        id="saveBtn"
+        type="submit"
+      >
+        💾 দোকানের তথ্য সংরক্ষণ করুন
+      </button>
+
+
+    </form>
+
+
+    <div
+      id="msg"
+      class="msg"
+    ></div>
+
+
+    <a
+      class="back"
+      href="owner-dashboard.html"
     >
-  </div>
+      ← Dashboard-এ ফিরে যান
+    </a>
 
 
-  <div class="field">
-    <label>WhatsApp নম্বর</label>
-
-    <input
-      id="whatsapp"
-      type="tel"
-      inputmode="tel"
-      maxlength="11"
-      autocomplete="tel"
-      placeholder="01XXXXXXXXX"
-    >
-  </div>
-
-</div>
-
-
-<div class="field">
-  <label>
-    ঠিকানা <span class="required">*</span>
-  </label>
-
-  <input
-    id="address"
-    type="text"
-    required
-    maxlength="250"
-    autocomplete="street-address"
-    placeholder="যেমন: কলেজ রোড, রুহিয়া"
-  >
-</div>
-
-
-<div class="field">
-  <label>এলাকা / লোকালিটি</label>
-
-  <input
-    id="locality"
-    type="text"
-    maxlength="100"
-    placeholder="যেমন: কলেজ রোড / হাজী মার্কেট / স্টেশন রোড"
-  >
-</div>
-
-
-<div class="field">
-  <label>দোকানের বিস্তারিত</label>
-
-  <textarea
-    id="description"
-    maxlength="1000"
-    placeholder="আপনার দোকান বা ব্যবসা সম্পর্কে লিখুন..."
-  ></textarea>
-</div>
-
-
-<div class="grid">
-
-  <div class="field">
-    <label>খোলার সময়</label>
-
-    <input
-      id="opening"
-      type="time"
-    >
-  </div>
-
-
-  <div class="field">
-    <label>বন্ধের সময়</label>
-
-    <input
-      id="closing"
-      type="time"
-    >
-  </div>
-
-</div>
-
-
-<div class="field">
-  <label>Google Maps Link</label>
-
-  <input
-    id="mapUrl"
-    type="url"
-    maxlength="500"
-    placeholder="https://maps.google.com/..."
-  >
-</div>
-
-
-<p class="note">
-  ⭐ দোকানের তথ্য সঠিকভাবে দিন। সংরক্ষণ করার পর এই তথ্য আপনার
-  পাবলিক Shop Profile-এ দেখানো হবে।
-</p>
-
-
-<button id="saveBtn" type="submit">
-  💾 দোকানের তথ্য সংরক্ষণ করুন
-</button>
-
-</form>
-
-<div id="msg" class="msg"></div>
-
-<a class="back" href="owner-dashboard.html">
-  ← Dashboard-এ ফিরে যান
-</a>
-
-</section>
+  </section>
 
 </main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 
 <script>
+
 const form = document.getElementById("shopForm");
 const msg = document.getElementById("msg");
 const saveBtn = document.getElementById("saveBtn");
@@ -364,59 +438,122 @@ const saveBtn = document.getElementById("saveBtn");
 let currentShopId = null;
 
 
+/* =========================
+   MESSAGE
+========================= */
+
 function showMessage(text, type) {
+
   msg.textContent = text;
   msg.className = "msg " + type;
-}
 
-
-function validBDMobile(number) {
-  return /^01[3-9]\d{8}$/.test(number);
 }
 
 
 /* =========================
-   LOAD OWNER'S SHOP
+   MOBILE VALIDATION
+========================= */
+
+function validBDMobile(number) {
+
+  return /^01[3-9]\d{8}$/.test(number);
+
+}
+
+
+/* =========================
+   CREATE SLUG
+========================= */
+
+function createSlug(shopName, userId) {
+
+  const englishSlug = shopName
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+
+  /*
+    বাংলা নাম হলে ইংরেজি অক্ষর পাওয়া নাও যেতে পারে।
+    তাই user ID থেকে unique অংশ যোগ করা হবে।
+  */
+
+  const safeId =
+    String(userId)
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .slice(0, 12)
+      .toLowerCase();
+
+
+  if (englishSlug) {
+
+    return englishSlug + "-" + safeId;
+
+  }
+
+
+  return "shop-" + safeId;
+
+}
+
+
+/* =========================
+   LOAD SHOP
 ========================= */
 
 async function loadShop() {
 
   if (!window.supabaseClient) {
+
     showMessage(
       "Supabase সংযোগ পাওয়া যাচ্ছে না।",
       "err"
     );
+
     return;
+
   }
+
 
   const {
     data: { session },
     error: sessionError
-  } = await window.supabaseClient.auth.getSession();
+  } =
+    await window.supabaseClient.auth.getSession();
 
 
   if (sessionError || !session) {
-    window.location.href = "owner-login.html";
+
+    window.location.href =
+      "owner-login.html";
+
     return;
+
   }
 
 
-  const userId = session.user.id;
+  const userId =
+    session.user.id;
 
 
   const {
     data: shop,
     error
-  } = await window.supabaseClient
-    .from("shops")
-    .select("*")
-    .eq("owner_id", userId)
-    .maybeSingle();
+  } =
+    await window.supabaseClient
+      .from("shops")
+      .select("*")
+      .eq("owner_id", userId)
+      .maybeSingle();
 
 
   if (error) {
 
-    console.error("Shop load error:", error);
+    console.error(
+      "Shop load error:",
+      error
+    );
 
     showMessage(
       "দোকানের তথ্য লোড করা যায়নি।",
@@ -424,18 +561,22 @@ async function loadShop() {
     );
 
     return;
+
   }
 
 
   if (!shop) {
+
     return;
+
   }
 
 
-  /* Database-এর আসল column অনুযায়ী */
+  currentShopId =
+    shop.id;
 
-  currentShopId = shop.id;
 
+  /* Database-এর আসল column */
 
   document.getElementById("shopName").value =
     shop.shop_name || "";
@@ -469,12 +610,12 @@ async function loadShop() {
     shop.map_url || "";
 
 
-  /* Opening / Closing time */
+  /* Opening hours */
 
   if (shop.opening_hours) {
 
     const parts =
-      shop.opening_hours.split("-");
+      shop.opening_hours.split(" - ");
 
 
     if (parts.length === 2) {
@@ -487,7 +628,9 @@ async function loadShop() {
         parts[1].trim();
 
     }
+
   }
+
 }
 
 
@@ -510,27 +653,37 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
     const {
-      data: { session }
-    } = await window.supabaseClient.auth.getSession();
+      data: { session },
+      error: sessionError
+    } =
+      await window.supabaseClient.auth.getSession();
 
 
-    if (!session) {
+    if (
+      sessionError ||
+      !session
+    ) {
 
       window.location.href =
         "owner-login.html";
 
       return;
+
     }
 
 
-    const userId = session.user.id;
+    const userId =
+      session.user.id;
 
 
-    /* Form values */
+    /* =========================
+       FORM VALUES
+    ========================= */
 
     const shopName =
       document
@@ -599,7 +752,9 @@ form.addEventListener(
         .trim();
 
 
-    /* Validation */
+    /* =========================
+       VALIDATION
+    ========================= */
 
     if (!shopName) {
 
@@ -609,6 +764,7 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -620,6 +776,7 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -631,6 +788,7 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -645,6 +803,7 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -656,26 +815,88 @@ form.addEventListener(
       );
 
       return;
+
     }
 
 
-    /* Opening hours */
+    /* =========================
+       OPENING HOURS
+    ========================= */
 
     let openingHours = null;
 
 
-    if (opening && closing) {
+    if (
+      opening &&
+      closing
+    ) {
 
       openingHours =
         opening + " - " + closing;
 
     } else if (opening) {
 
-      openingHours = opening;
+      openingHours =
+        opening;
 
     } else if (closing) {
 
-      openingHours = closing;
+      openingHours =
+        closing;
+
+    }
+
+
+    /* =========================
+       SLUG
+    ========================= */
+
+    let slug = null;
+
+
+    if (currentShopId) {
+
+      /*
+        পুরোনো দোকানের slug থাকলে
+        সেটাই রাখা হবে।
+      */
+
+      const {
+        data: oldShop
+      } =
+        await window.supabaseClient
+          .from("shops")
+          .select("slug")
+          .eq("id", currentShopId)
+          .eq("owner_id", userId)
+          .maybeSingle();
+
+
+      if (
+        oldShop &&
+        oldShop.slug
+      ) {
+
+        slug =
+          oldShop.slug;
+
+      }
+
+    }
+
+
+    /*
+      নতুন দোকানের জন্য
+      automatic unique slug
+    */
+
+    if (!slug) {
+
+      slug =
+        createSlug(
+          shopName,
+          userId
+        );
 
     }
 
@@ -689,6 +910,8 @@ form.addEventListener(
       owner_id: userId,
 
       shop_name: shopName,
+
+      slug: slug,
 
       category: category,
 
@@ -714,7 +937,9 @@ form.addEventListener(
     };
 
 
-    /* Button loading */
+    /* =========================
+       BUTTON LOADING
+    ========================= */
 
     saveBtn.disabled = true;
 
@@ -728,7 +953,7 @@ form.addEventListener(
 
 
       /* =========================
-         UPDATE EXISTING SHOP
+         EXISTING SHOP UPDATE
       ========================= */
 
       if (currentShopId) {
@@ -737,17 +962,28 @@ form.addEventListener(
           await window.supabaseClient
             .from("shops")
             .update(shopData)
-            .eq("id", currentShopId)
-            .eq("owner_id", userId);
-
+            .eq(
+              "id",
+              currentShopId
+            )
+            .eq(
+              "owner_id",
+              userId
+            );
 
       }
 
+
       /* =========================
-         CHECK EXISTING SHOP
+         NEW SHOP
       ========================= */
 
       else {
+
+        /*
+          আগে দেখি এই owner-এর
+          দোকান আছে কি না।
+        */
 
         const {
           data: existingShop,
@@ -755,22 +991,42 @@ form.addEventListener(
         } =
           await window.supabaseClient
             .from("shops")
-            .select("id")
-            .eq("owner_id", userId)
+            .select("id,slug")
+            .eq(
+              "owner_id",
+              userId
+            )
             .maybeSingle();
 
 
         if (checkError) {
+
           throw checkError;
+
         }
 
 
-        /* Existing shop found */
+        /* Existing shop */
 
         if (existingShop) {
 
           currentShopId =
             existingShop.id;
+
+
+          /*
+            Existing slug থাকলে
+            সেটি রাখা হবে।
+          */
+
+          if (
+            existingShop.slug
+          ) {
+
+            shopData.slug =
+              existingShop.slug;
+
+          }
 
 
           result =
@@ -787,6 +1043,7 @@ form.addEventListener(
               );
 
         }
+
 
         /* New shop */
 
@@ -815,7 +1072,9 @@ form.addEventListener(
       }
 
 
-      /* Database error */
+      /* =========================
+         DATABASE ERROR
+      ========================= */
 
       if (result.error) {
 
@@ -824,6 +1083,7 @@ form.addEventListener(
           result.error
         );
 
+
         showMessage(
           result.error.message ||
           "দোকানের তথ্য সংরক্ষণ করা যায়নি।",
@@ -831,10 +1091,13 @@ form.addEventListener(
         );
 
         return;
+
       }
 
 
-      /* Success */
+      /* =========================
+         SUCCESS
+      ========================= */
 
       showMessage(
         "✅ দোকানের তথ্য সফলভাবে সংরক্ষণ হয়েছে।",
@@ -859,7 +1122,8 @@ form.addEventListener(
 
     } finally {
 
-      saveBtn.disabled = false;
+      saveBtn.disabled =
+        false;
 
       saveBtn.textContent =
         "💾 দোকানের তথ্য সংরক্ষণ করুন";
@@ -870,7 +1134,9 @@ form.addEventListener(
 );
 
 
-/* Page load */
+/* =========================
+   PAGE LOAD
+========================= */
 
 loadShop();
 
