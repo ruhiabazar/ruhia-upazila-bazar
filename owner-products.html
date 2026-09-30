@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products / Services — Ruhia Upazila Bazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0B6E4F;--bg:#f3faf7;--text:#15352b;--muted:#678078;--border:#dcebe5;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Hind Siliguri",sans-serif}
+a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:#0B6E4F;color:#fff;padding:14px 16px;box-shadow:0 5px 18px #0001}
+.topbar-inner{max-width:760px;margin:auto;display:flex;align-items:center;gap:12px}.back{width:42px;height:42px;border-radius:13px;background:#ffffff22;display:grid;place-items:center;font-size:21px}
+.brand{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:15px}.subtitle{font-size:12px;opacity:.85}
+main{max-width:760px;margin:auto;padding:18px 14px 42px}.hero{background:linear-gradient(135deg,#0B6E4F,#14966e);color:#fff;border-radius:24px;padding:22px 18px;margin-bottom:16px}
+.hero h1{margin:0 0 5px;font-size:25px}.hero p{margin:0;opacity:.9;font-size:14px}
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:17px;margin-bottom:15px;box-shadow:0 7px 20px #0b6e4f0f}.card h2{font-size:18px;margin:0 0 13px}
+label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}.field{margin-bottom:13px}
+input,textarea,select{width:100%;border:1px solid #cfe2db;border-radius:13px;padding:12px 13px;outline:none;background:#fbfefd;color:var(--text)}
+input:focus,textarea:focus,select:focus{border-color:var(--g);box-shadow:0 0 0 3px #0b6e4f1a}textarea{min-height:95px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;border:0;border-radius:14px;padding:13px 15px;font-weight:800;cursor:pointer}
+.btn-primary{background:var(--g);color:#fff}.btn-secondary{background:#edf7f3;color:var(--g);border:1px solid #cfe7dd}.btn-danger{background:#fff0f0;color:var(--red);border:1px solid #fecaca}
+.msg{display:none;border-radius:12px;padding:11px 13px;margin-bottom:13px;font-size:14px;font-weight:700}.msg.ok{display:block;background:#e9f8ef;color:#12633e}.msg.error{display:block;background:#fff0f0;color:#a51d1d}
+.empty,.loader{text-align:center;padding:24px 10px;color:var(--muted)}.product{border:1px solid var(--border);border-radius:17px;padding:14px;margin-top:11px;background:#fcfffe}
+.product-top{display:flex;gap:12px}.product-img{width:76px;height:76px;flex:0 0 76px;border-radius:13px;object-fit:cover;background:#e8f3ef}.placeholder{display:grid;place-items:center;font-size:27px}
+.product-name{font-size:17px;font-weight:800}.price{color:var(--g);font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:14px}
+.desc{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.55}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.actions button{padding:10px;border-radius:11px}
+.hint{font-size:12px;color:var(--muted);margin-top:5px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="back" href="owner-dashboard.html">←</a>
+<div><div class="brand">RUHIA UPAZILA BAZAR</div><div class="subtitle">Products / Services</div></div>
+</div></header>
+<main>
+<section class="hero"><h1>📦 পণ্য / সার্ভিস</h1><p>আপনার দোকানের পণ্য ও সার্ভিস যোগ করুন এবং পরে Edit বা Delete করতে পারবেন।</p></section>
+<div id="msg" class="msg"></div>
+<section class="card">
+<h2 id="formTitle">➕ নতুন পণ্য / সার্ভিস যোগ করুন</h2>
+<form id="productForm">
+<div class="field"><label for="productName">পণ্য / সার্ভিসের নাম *</label><input id="productName" required placeholder="যেমন: চাল, মোবাইল রিচার্জ, হেয়ার কাট"></div>
+<div class="row">
+<div class="field"><label for="price">দাম</label><input id="price" type="number" min="0" step="0.01" placeholder="যেমন: 500"></div>
+<div class="field"><label for="unit">ইউনিট</label><input id="unit" placeholder="যেমন: কেজি / পিস / সার্ভিস"></div>
+</div>
+<div class="field"><label for="imageUrl">ছবির URL (ঐচ্ছিক)</label><input id="imageUrl" type="url" placeholder="https://..."><div class="hint">এখন URL ব্যবহার হচ্ছে। পরে সরাসরি ছবি Upload যোগ করা যাবে।</div></div>
+<div class="field"><label for="description">বিস্তারিত</label><textarea id="description" placeholder="পণ্য বা সার্ভিস সম্পর্কে সংক্ষিপ্ত তথ্য"></textarea></div>
+<div class="field"><label for="status">স্ট্যাটাস</label><select id="status"><option value="active">Active — পাবলিক সাইটে দেখাবে</option><option value="inactive">Inactive — এখন দেখাবে না</option></select></div>
+<button id="saveBtn" class="btn btn-primary" type="submit">💾 পণ্য / সার্ভিস Save করুন</button>
+<button id="cancelBtn" class="btn btn-secondary" type="button" style="display:none;margin-top:8px">✖ Edit বাতিল</button>
+</form>
+</section>
+<section class="card"><h2>📋 আমার পণ্য / সার্ভিস</h2><div id="list" class="loader">লোড হচ্ছে...</div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+let currentShop=null,editingId=null;
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function msg(t,type="ok"){const b=$("msg");b.textContent=t;b.className="msg "+type;scrollTo({top:0,behavior:"smooth"})}
+function resetForm(){editingId=null;$("productForm").reset();$("status").value="active";$("formTitle").textContent="➕ নতুন পণ্য / সার্ভিস যোগ করুন";$("saveBtn").textContent="💾 পণ্য / সার্ভিস Save করুন";$("cancelBtn").style.display="none"}
+async function init(){
+ if(!window.supabaseClient){$("list").innerHTML='<div class="empty">Supabase সংযোগ পাওয়া যাচ্ছে না।</div>';return}
+ const {data,error}=await window.supabaseClient.auth.getSession();
+ if(error||!data.session){location.href="owner-login.html";return}
+ const {data:shop,error:se}=await window.supabaseClient.from("shops").select("id,shop_name").eq("owner_id",data.session.user.id).maybeSingle();
+ if(se){$("list").innerHTML='<div class="empty">দোকানের তথ্য লোড করা যায়নি।</div>';return}
+ if(!shop){$("productForm").style.display="none";$("list").innerHTML='<div class="empty">আগে দোকানের তথ্য Save করুন।<br><br><a href="owner-shop.html" style="color:#0B6E4F;font-weight:800">🏪 My Shop-এ যান</a></div>';return}
+ currentShop=shop;await loadProducts()
+}
+async function loadProducts(){
+ const {data,error}=await window.supabaseClient.from("products").select("*").eq("shop_id",currentShop.id).order("created_at",{ascending:false});
+ if(error){console.error(error);$("list").innerHTML='<div class="empty">Products table-এর field যাচাই করা দরকার।</div>';return}
+ if(!data?.length){$("list").innerHTML='<div class="empty">এখনো কোনো পণ্য / সার্ভিস যোগ করা হয়নি।</div>';return}
+ $("list").innerHTML=data.map(p=>{
+  const name=p.name||p.product_name||"নাম নেই",img=p.image_url||p.photo_url||p.image;
+  const price=p.price!==null&&p.price!==undefined&&p.price!==""?"৳"+esc(p.price)+(p.unit?" / "+esc(p.unit):""):"দাম উল্লেখ নেই";
+  return `<article class="product"><div class="product-top">${img?`<img class="product-img" src="${esc(img)}" alt="${esc(name)}">`:`<div class="product-img placeholder">📦</div>`}<div><div class="product-name">${esc(name)}</div><div class="price">${price}</div><div class="hint">${String(p.status||"active").toLowerCase()==="active"?"🟢 Active":"⚪ Inactive"}</div></div></div>${p.description?`<div class="desc">${esc(p.description)}</div>`:""}<div class="actions"><button class="btn btn-secondary" onclick="editProduct('${esc(p.id)}')">✏️ Edit</button><button class="btn btn-danger" onclick="deleteProduct('${esc(p.id)}')">🗑️ Delete</button></div></article>`
+ }).join("")
+}
+$("productForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!currentShop){msg("আগে দোকানের তথ্য তৈরি করুন।","error");return}
+ const name=$("productName").value.trim();if(!name){msg("পণ্য / সার্ভিসের নাম দিন।","error");return}
+ const payload={shop_id:currentShop.id,name,price:$("price").value.trim()===""?null:Number($("price").value),description:$("description").value.trim()||null,image_url:$("imageUrl").value.trim()||null,status:$("status").value};
+ if($("unit").value.trim())payload.unit=$("unit").value.trim();
+ $("saveBtn").disabled=true;$("saveBtn").textContent=editingId?"⏳ Update হচ্ছে...":"⏳ Save হচ্ছে...";
+ const result=editingId?await window.supabaseClient.from("products").update(payload).eq("id",editingId).eq("shop_id",currentShop.id):await window.supabaseClient.from("products").insert(payload);
+ $("saveBtn").disabled=false;
+ if(result.error){console.error(result.error);msg("Save করা যায়নি: "+result.error.message,"error");$("saveBtn").textContent=editingId?"💾 Update করুন":"💾 পণ্য / সার্ভিস Save করুন";return}
+ msg(editingId?"পণ্য / সার্ভিস সফলভাবে Update হয়েছে।":"পণ্য / সার্ভিস সফলভাবে যোগ হয়েছে।");resetForm();await loadProducts()
+});
+async function editProduct(id){
+ const {data,error}=await window.supabaseClient.from("products").select("*").eq("id",id).eq("shop_id",currentShop.id).maybeSingle();
+ if(error||!data){msg("পণ্যটি পাওয়া যায়নি।","error");return}
+ editingId=data.id;$("productName").value=data.name||data.product_name||"";$("price").value=data.price??"";$("unit").value=data.unit||"";$("imageUrl").value=data.image_url||data.photo_url||data.image||"";$("description").value=data.description||"";$("status").value=data.status||"active";$("formTitle").textContent="✏️ পণ্য / সার্ভিস Edit করুন";$("saveBtn").textContent="💾 Update করুন";$("cancelBtn").style.display="block";scrollTo({top:0,behavior:"smooth"})
+}
+async function deleteProduct(id){
+ if(!confirm("এই পণ্য / সার্ভিসটি Delete করতে চান?"))return;
+ const {error}=await window.supabaseClient.from("products").delete().eq("id",id).eq("shop_id",currentShop.id);
+ if(error){msg("Delete করা যায়নি: "+error.message,"error");return}
+ msg("পণ্য / সার্ভিস Delete হয়েছে।");await loadProducts()
+}
+$("cancelBtn").addEventListener("click",resetForm);init();
+</script>
+</body>
+</html>
