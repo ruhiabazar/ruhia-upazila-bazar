@@ -90,7 +90,7 @@ body{
 .shop-meta{
   color:#68766f;
   font-size:14px;
-  line-height:1.7;
+  line-height:1.8;
 }
 
 .no-shop{
@@ -171,6 +171,16 @@ body{
   color:#68766f;
 }
 
+.notice{
+  display:none;
+  margin-top:14px;
+  padding:11px;
+  border-radius:10px;
+  background:#fff4d6;
+  color:#765000;
+  font-size:14px;
+}
+
 @media(max-width:520px){
 
   .dashboard-grid{
@@ -198,7 +208,7 @@ body{
 <main class="dashboard">
 
 
-  <!-- TOP -->
+  <!-- HEADER -->
 
   <section class="topbar">
 
@@ -213,7 +223,7 @@ body{
   </section>
 
 
-  <!-- SHOP -->
+  <!-- SHOP INFORMATION -->
 
   <section class="shop-card">
 
@@ -232,10 +242,12 @@ body{
   </section>
 
 
-  <!-- MENU -->
+  <!-- DASHBOARD MENU -->
 
   <section class="dashboard-grid">
 
+
+    <!-- MY SHOP -->
 
     <a
       class="dashboard-link"
@@ -250,6 +262,8 @@ body{
 
     </a>
 
+
+    <!-- PHOTOS -->
 
     <a
       class="dashboard-link"
@@ -266,10 +280,11 @@ body{
     </a>
 
 
+    <!-- PRODUCTS -->
+
     <a
       class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'📦 Products / Services')"
+      href="owner-products.html"
     >
 
       <span>📦</span>
@@ -280,6 +295,8 @@ body{
 
     </a>
 
+
+    <!-- OFFERS -->
 
     <a
       class="dashboard-link"
@@ -296,6 +313,8 @@ body{
     </a>
 
 
+    <!-- PROMOTION -->
+
     <a
       class="dashboard-link"
       href="#"
@@ -310,6 +329,8 @@ body{
 
     </a>
 
+
+    <!-- PACKAGE -->
 
     <a
       class="dashboard-link"
@@ -326,6 +347,8 @@ body{
     </a>
 
 
+    <!-- PAYMENTS -->
+
     <a
       class="dashboard-link"
       href="#"
@@ -340,6 +363,8 @@ body{
 
     </a>
 
+
+    <!-- ANALYTICS -->
 
     <a
       class="dashboard-link"
@@ -359,6 +384,12 @@ body{
   </section>
 
 
+  <div
+    id="notice"
+    class="notice"
+  ></div>
+
+
   <!-- LOGOUT -->
 
   <button
@@ -369,6 +400,8 @@ body{
     🚪 লগআউট
   </button>
 
+
+  <!-- BACK -->
 
   <a
     class="back"
@@ -391,10 +424,31 @@ function comingSoon(event, name) {
 
   event.preventDefault();
 
-  alert(
+  const notice =
+    document.getElementById("notice");
+
+  notice.textContent =
     name +
-    " ফিচারটি পরবর্তী ধাপে চালু হবে।"
-  );
+    " ফিচারটি পরবর্তী ধাপে চালু হবে।";
+
+  notice.style.display =
+    "block";
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 }
 
@@ -405,12 +459,17 @@ function comingSoon(event, name) {
 
 async function loadDashboard() {
 
+  /* Supabase check */
+
   if (!window.supabaseClient) {
 
     document.getElementById(
       "shopInfo"
-    ).innerHTML =
-      '<p class="no-shop">Supabase সংযোগ পাওয়া যাচ্ছে না।</p>';
+    ).innerHTML = `
+      <p class="no-shop">
+        Supabase সংযোগ পাওয়া যাচ্ছে না।
+      </p>
+    `;
 
     return;
 
@@ -418,7 +477,7 @@ async function loadDashboard() {
 
 
   /* =========================
-     SESSION
+     GET SESSION
   ========================= */
 
   const {
@@ -453,8 +512,14 @@ async function loadDashboard() {
 
   let ownerName =
     user.user_metadata?.full_name ||
+    user.user_metadata?.name ||
     "";
 
+
+  /*
+    Profiles table থাকলে
+    সেখান থেকেও নাম নেওয়ার চেষ্টা করবে।
+  */
 
   try {
 
@@ -464,31 +529,26 @@ async function loadDashboard() {
     } =
       await window.supabaseClient
         .from("profiles")
-        .select(
-          "full_name,status"
-        )
-        .eq(
-          "id",
-          user.id
-        )
+        .select("full_name")
+        .eq("id", user.id)
         .maybeSingle();
 
 
     if (
       !profileError &&
-      profile
+      profile &&
+      profile.full_name
     ) {
 
       ownerName =
-        profile.full_name ||
-        ownerName;
+        profile.full_name;
 
     }
 
   } catch (error) {
 
-    console.error(
-      "Profile error:",
+    console.log(
+      "Profile lookup skipped:",
       error
     );
 
@@ -516,261 +576,257 @@ async function loadDashboard() {
      LOAD SHOP
   ========================= */
 
-  try {
-
-    const {
-      data: shop,
-      error: shopError
-    } =
-      await window.supabaseClient
-        .from("shops")
-        .select(
-          "id,shop_name,category,mobile,whatsapp,address,locality,status,package_type,package_expires_at,featured"
-        )
-        .eq(
-          "owner_id",
-          user.id
-        )
-        .maybeSingle();
-
-
-    if (shopError) {
-
-      console.error(
-        "Shop error:",
-        shopError
-      );
-
-
-      document.getElementById(
-        "shopInfo"
-      ).innerHTML =
-        '<p class="no-shop">দোকানের তথ্য লোড করা যায়নি।</p>';
-
-      return;
-
-    }
+  const {
+    data: shop,
+    error: shopError
+  } =
+    await window.supabaseClient
+      .from("shops")
+      .select(`
+        id,
+        shop_name,
+        category,
+        mobile,
+        whatsapp,
+        address,
+        locality,
+        status,
+        package_type,
+        package_expires_at,
+        featured
+      `)
+      .eq(
+        "owner_id",
+        user.id
+      )
+      .maybeSingle();
 
 
-    /* =========================
-       NO SHOP
-    ========================= */
+  /* =========================
+     SHOP ERROR
+  ========================= */
 
-    if (!shop) {
+  if (shopError) {
 
-      document.getElementById(
-        "shopInfo"
-      ).innerHTML = `
+    console.error(
+      "Shop error:",
+      shopError
+    );
 
-        <p class="no-shop">
-          দোকানের তথ্য এখনো যোগ করা হয়নি।
-        </p>
+    document.getElementById(
+      "shopInfo"
+    ).innerHTML = `
+      <p class="no-shop">
+        দোকানের তথ্য লোড করা যায়নি।
+      </p>
+    `;
 
-        <a
-          href="owner-shop.html"
-          style="
-            display:inline-block;
-            margin-top:8px;
-            color:#0B6E4F;
-            font-weight:800;
-            text-decoration:none;
-          "
-        >
-          ➕ এখনই দোকানের তথ্য যোগ করুন
-        </a>
+    return;
 
-      `;
-
-      return;
-
-    }
+  }
 
 
-    /* =========================
-       SHOP STATUS
-    ========================= */
+  /* =========================
+     NO SHOP
+  ========================= */
 
-    let statusText =
-      shop.status ||
-      "Pending";
-
-
-    let statusLabel =
-      "স্ট্যাটাস: " +
-      statusText;
-
-
-    if (
-      statusText.toLowerCase() ===
-      "active"
-    ) {
-
-      statusLabel =
-        "স্ট্যাটাস: Active";
-
-    }
-
-
-    /* =========================
-       PACKAGE
-    ========================= */
-
-    let packageText =
-      shop.package_type ||
-      "Package নির্বাচন করা হয়নি";
-
-
-    /* =========================
-       EXPIRY
-    ========================= */
-
-    let expiryText =
-      "";
-
-
-    if (
-      shop.package_expires_at
-    ) {
-
-      const date =
-        new Date(
-          shop.package_expires_at
-        );
-
-
-      if (
-        !Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        expiryText =
-          "প্যাকেজ শেষ হবে: " +
-          date.toLocaleDateString(
-            "bn-BD"
-          );
-
-      }
-
-    }
-
-
-    /* =========================
-       SHOP INFO
-    ========================= */
+  if (!shop) {
 
     document.getElementById(
       "shopInfo"
     ).innerHTML = `
 
-      <div class="shop-name">
-        ${escapeHtml(
-          shop.shop_name || "দোকানের নাম নেই"
-        )}
-      </div>
+      <p class="no-shop">
+        দোকানের তথ্য এখনো যোগ করা হয়নি।
+      </p>
 
-      <div class="shop-meta">
-
-        📂 ক্যাটাগরি:
-        ${escapeHtml(
-          shop.category || "নির্ধারিত নয়"
-        )}
-
-        <br>
-
-        📱 মোবাইল:
-        ${escapeHtml(
-          shop.mobile || "নেই"
-        )}
-
-        <br>
-
-        📍 ঠিকানা:
-        ${escapeHtml(
-          shop.address || "নেই"
-        )}
-
-        ${
-          shop.locality
-          ? "<br>📌 এলাকা: " +
-            escapeHtml(
-              shop.locality
-            )
-          : ""
-        }
-
-        <br>
-
-        📦 প্যাকেজ:
-        ${escapeHtml(
-          packageText
-        )}
-
-        ${
-          expiryText
-          ? "<br>" +
-            escapeHtml(
-              expiryText
-            )
-          : ""
-        }
-
-      </div>
-
-      <div class="status">
-        ${escapeHtml(
-          statusLabel
-        )}
-      </div>
+      <a
+        href="owner-shop.html"
+        style="
+          display:inline-block;
+          margin-top:8px;
+          color:#0B6E4F;
+          font-weight:800;
+          text-decoration:none;
+        "
+      >
+        ➕ এখনই দোকানের তথ্য যোগ করুন
+      </a>
 
     `;
 
-
-  } catch (error) {
-
-    console.error(
-      "Dashboard error:",
-      error
-    );
-
-
-    document.getElementById(
-      "shopInfo"
-    ).innerHTML =
-      '<p class="no-shop">দোকানের তথ্য দেখাতে সমস্যা হয়েছে।</p>';
+    return;
 
   }
 
-}
 
+  /* =========================
+     STATUS
+  ========================= */
 
-/* =========================
-   HTML SECURITY
-========================= */
-
-function escapeHtml(value) {
-
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
+  const rawStatus =
+    String(
+      shop.status ||
+      "pending"
     );
+
+
+  let statusText =
+    "স্ট্যাটাস: " +
+    rawStatus;
+
+
+  if (
+    rawStatus.toLowerCase() ===
+    "active"
+  ) {
+
+    statusText =
+      "স্ট্যাটাস: Active";
+
+  }
+
+
+  /* =========================
+     PACKAGE
+  ========================= */
+
+  const packageText =
+    shop.package_type ||
+    "Package নির্বাচন করা হয়নি";
+
+
+  /* =========================
+     EXPIRY
+  ========================= */
+
+  let expiryText =
+    "";
+
+
+  if (
+    shop.package_expires_at
+  ) {
+
+    const expiry =
+      new Date(
+        shop.package_expires_at
+      );
+
+
+    if (
+      !Number.isNaN(
+        expiry.getTime()
+      )
+    ) {
+
+      expiryText =
+        "প্যাকেজ শেষ হবে: " +
+        expiry.toLocaleDateString(
+          "bn-BD"
+        );
+
+    }
+
+  }
+
+
+  /* =========================
+     FEATURED
+  ========================= */
+
+  const featuredText =
+    shop.featured
+      ? "<br>⭐ Featured Shop"
+      : "";
+
+
+  /* =========================
+     SHOW SHOP
+  ========================= */
+
+  document.getElementById(
+    "shopInfo"
+  ).innerHTML = `
+
+    <div class="shop-name">
+
+      ${escapeHtml(
+        shop.shop_name ||
+        "দোকানের নাম নেই"
+      )}
+
+    </div>
+
+
+    <div class="shop-meta">
+
+      📂 ক্যাটাগরি:
+      ${escapeHtml(
+        shop.category ||
+        "নির্ধারিত নয়"
+      )}
+
+      <br>
+
+      📱 মোবাইল:
+      ${escapeHtml(
+        shop.mobile ||
+        "নেই"
+      )}
+
+      <br>
+
+      📍 ঠিকানা:
+      ${escapeHtml(
+        shop.address ||
+        "নেই"
+      )}
+
+      ${
+        shop.locality
+          ? `
+            <br>
+            📌 এলাকা:
+            ${escapeHtml(
+              shop.locality
+            )}
+          `
+          : ""
+      }
+
+      <br>
+
+      📦 প্যাকেজ:
+      ${escapeHtml(
+        packageText
+      )}
+
+      ${
+        expiryText
+          ? `
+            <br>
+            ${escapeHtml(
+              expiryText
+            )}
+          `
+          : ""
+      }
+
+      ${featuredText}
+
+    </div>
+
+
+    <div class="status">
+
+      ${escapeHtml(
+        statusText
+      )}
+
+    </div>
+
+  `;
 
 }
 
@@ -794,8 +850,21 @@ document
       button.disabled =
         true;
 
+
       button.textContent =
         "⏳ লগআউট হচ্ছে...";
+
+
+      if (
+        !window.supabaseClient
+      ) {
+
+        window.location.href =
+          "owner-login.html";
+
+        return;
+
+      }
 
 
       const {
@@ -822,6 +891,7 @@ document
         button.disabled =
           false;
 
+
         button.textContent =
           "🚪 লগআউট";
 
@@ -838,7 +908,7 @@ document
 
 
 /* =========================
-   START
+   START DASHBOARD
 ========================= */
 
 loadDashboard();
