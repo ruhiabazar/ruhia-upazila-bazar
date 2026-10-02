@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="UTF-8">
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <meta
@@ -16,7 +16,7 @@
 >
 
 <title>
-  Owner Dashboard - Ruhia Upazila Bazar
+  Shop Owner Dashboard - Ruhia Upazila Bazar
 </title>
 
 <link
@@ -208,210 +208,187 @@ body{
 <main class="dashboard">
 
 
-  <!-- HEADER -->
+<section class="topbar">
 
-  <section class="topbar">
+<h1>
+Shop Owner Dashboard
+</h1>
 
-    <h1>
-      Shop Owner Dashboard
-    </h1>
+<p id="welcome">
+আপনার ব্যবসা পরিচালনা করুন
+</p>
 
-    <p id="welcome">
-      আপনার ব্যবসা পরিচালনা করুন
-    </p>
+</section>
 
-  </section>
 
+<section class="shop-card">
 
-  <!-- SHOP INFORMATION -->
+<h2>
+🏪 আমার দোকান
+</h2>
 
-  <section class="shop-card">
+<div id="shopInfo">
 
-    <h2>
-      🏪 আমার দোকান
-    </h2>
+<p class="loading">
+দোকানের তথ্য লোড হচ্ছে...
+</p>
 
-    <div id="shopInfo">
+</div>
 
-      <p class="loading">
-        দোকানের তথ্য লোড হচ্ছে...
-      </p>
+</section>
 
-    </div>
 
-  </section>
+<section class="dashboard-grid">
 
 
-  <!-- DASHBOARD MENU -->
+<a
+class="dashboard-link"
+href="owner-shop.html"
+>
 
-  <section class="dashboard-grid">
+<span>🏪</span>
 
+<div>
+My Shop
+</div>
 
-    <!-- MY SHOP -->
+</a>
 
-    <a
-      class="dashboard-link"
-      href="owner-shop.html"
-    >
 
-      <span>🏪</span>
+<a
+class="dashboard-link"
+href="#"
+onclick="comingSoon(event,'📸 Photos')"
+>
 
-      <div>
-        My Shop
-      </div>
+<span>📸</span>
 
-    </a>
+<div>
+Photos
+</div>
 
+</a>
 
-    <!-- PHOTOS -->
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'📸 Photos')"
-    >
+<a
+class="dashboard-link"
+href="owner-products.html"
+>
 
-      <span>📸</span>
+<span>📦</span>
 
-      <div>
-        Photos
-      </div>
+<div>
+Products / Services
+</div>
 
-    </a>
+</a>
 
 
-    <!-- PRODUCTS -->
+<a
+class="dashboard-link"
+href="owner-offers.html"
+>
 
-    <a
-      class="dashboard-link"
-      href="owner-products.html"
-    >
+<span>🎁</span>
 
-      <span>📦</span>
+<div>
+Offers
+</div>
 
-      <div>
-        Products / Services
-      </div>
+</a>
 
-    </a>
 
+<a
+class="dashboard-link"
+href="#"
+onclick="comingSoon(event,'🚀 Promotion')"
+>
 
-    <!-- OFFERS -->
+<span>🚀</span>
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'🎁 Offers')"
-    >
+<div>
+Promotion
+</div>
 
-      <span>🎁</span>
+</a>
 
-      <div>
-        Offers
-      </div>
 
-    </a>
+<a
+class="dashboard-link"
+href="#"
+onclick="comingSoon(event,'💳 My Package')"
+>
 
+<span>💳</span>
 
-    <!-- PROMOTION -->
+<div>
+My Package
+</div>
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'🚀 Promotion')"
-    >
+</a>
 
-      <span>🚀</span>
 
-      <div>
-        Promotion
-      </div>
+<a
+class="dashboard-link"
+href="#"
+onclick="comingSoon(event,'💰 Payments')"
+>
 
-    </a>
+<span>💰</span>
 
+<div>
+Payments
+</div>
 
-    <!-- PACKAGE -->
+</a>
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'💳 My Package')"
-    >
 
-      <span>💳</span>
+<a
+class="dashboard-link"
+href="#"
+onclick="comingSoon(event,'📊 Analytics')"
+>
 
-      <div>
-        My Package
-      </div>
+<span>📊</span>
 
-    </a>
+<div>
+Analytics
+</div>
 
+</a>
 
-    <!-- PAYMENTS -->
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'💰 Payments')"
-    >
+</section>
 
-      <span>💰</span>
 
-      <div>
-        Payments
-      </div>
+<div
+id="notice"
+class="notice"
+></div>
 
-    </a>
 
+<button
+id="logout"
+class="logout"
+type="button"
+>
 
-    <!-- ANALYTICS -->
+🚪 লগআউট
 
-    <a
-      class="dashboard-link"
-      href="#"
-      onclick="comingSoon(event,'📊 Analytics')"
-    >
+</button>
 
-      <span>📊</span>
 
-      <div>
-        Analytics
-      </div>
+<a
+class="back"
+href="index.html"
+>
 
-    </a>
+← মূল ওয়েবসাইটে ফিরে যান
 
+</a>
 
-  </section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-  <div
-    id="notice"
-    class="notice"
-  ></div>
-
-
-  <!-- LOGOUT -->
-
-  <button
-    id="logout"
-    class="logout"
-    type="button"
-  >
-    🚪 লগআউট
-  </button>
-
-
-  <!-- BACK -->
-
-  <a
-    class="back"
-    href="index.html"
-  >
-    ← মূল ওয়েবসাইটে ফিরে যান
-  </a>
-
-
-</main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 
 <script>
@@ -438,7 +415,7 @@ function comingSoon(event, name) {
 
 
 /* =========================
-   ESCAPE HTML
+   HTML SECURITY
 ========================= */
 
 function escapeHtml(value) {
@@ -459,8 +436,6 @@ function escapeHtml(value) {
 
 async function loadDashboard() {
 
-  /* Supabase check */
-
   if (!window.supabaseClient) {
 
     document.getElementById(
@@ -477,11 +452,11 @@ async function loadDashboard() {
 
 
   /* =========================
-     GET SESSION
+     CHECK LOGIN
   ========================= */
 
   const {
-    data: { session },
+    data: sessionData,
     error: sessionError
   } =
     await window.supabaseClient
@@ -491,7 +466,8 @@ async function loadDashboard() {
 
   if (
     sessionError ||
-    !session
+    !sessionData ||
+    !sessionData.session
   ) {
 
     window.location.href =
@@ -503,7 +479,7 @@ async function loadDashboard() {
 
 
   const user =
-    session.user;
+    sessionData.session.user;
 
 
   /* =========================
@@ -517,43 +493,10 @@ async function loadDashboard() {
 
 
   /*
-    Profiles table থাকলে
-    সেখান থেকেও নাম নেওয়ার চেষ্টা করবে।
+    Registration-এর সময়
+    নাম metadata-তে থাকলে
+    এখান থেকে পাওয়া যাবে।
   */
-
-  try {
-
-    const {
-      data: profile,
-      error: profileError
-    } =
-      await window.supabaseClient
-        .from("profiles")
-        .select("full_name")
-        .eq("id", user.id)
-        .maybeSingle();
-
-
-    if (
-      !profileError &&
-      profile &&
-      profile.full_name
-    ) {
-
-      ownerName =
-        profile.full_name;
-
-    }
-
-  } catch (error) {
-
-    console.log(
-      "Profile lookup skipped:",
-      error
-    );
-
-  }
-
 
   if (!ownerName) {
 
@@ -573,7 +516,7 @@ async function loadDashboard() {
 
 
   /* =========================
-     LOAD SHOP
+     FIND OWNER SHOP
   ========================= */
 
   const {
@@ -609,16 +552,33 @@ async function loadDashboard() {
   if (shopError) {
 
     console.error(
-      "Shop error:",
+      "Shop loading error:",
       shopError
     );
 
     document.getElementById(
       "shopInfo"
     ).innerHTML = `
+
       <p class="no-shop">
+
         দোকানের তথ্য লোড করা যায়নি।
+
       </p>
+
+      <p
+        style="
+          font-size:12px;
+          color:#888;
+        "
+      >
+
+        ${escapeHtml(
+          shopError.message
+        )}
+
+      </p>
+
     `;
 
     return;
@@ -637,7 +597,9 @@ async function loadDashboard() {
     ).innerHTML = `
 
       <p class="no-shop">
+
         দোকানের তথ্য এখনো যোগ করা হয়নি।
+
       </p>
 
       <a
@@ -650,7 +612,9 @@ async function loadDashboard() {
           text-decoration:none;
         "
       >
+
         ➕ এখনই দোকানের তথ্য যোগ করুন
+
       </a>
 
     `;
@@ -697,7 +661,7 @@ async function loadDashboard() {
 
 
   /* =========================
-     EXPIRY
+     PACKAGE EXPIRY
   ========================= */
 
   let expiryText =
@@ -737,12 +701,15 @@ async function loadDashboard() {
 
   const featuredText =
     shop.featured
-      ? "<br>⭐ Featured Shop"
+      ? `
+        <br>
+        ⭐ Featured Shop
+      `
       : "";
 
 
   /* =========================
-     SHOW SHOP
+     SHOW SHOP INFORMATION
   ========================= */
 
   document.getElementById(
@@ -787,6 +754,7 @@ async function loadDashboard() {
         shop.locality
           ? `
             <br>
+
             📌 এলাকা:
             ${escapeHtml(
               shop.locality
@@ -806,6 +774,7 @@ async function loadDashboard() {
         expiryText
           ? `
             <br>
+
             ${escapeHtml(
               expiryText
             )}
@@ -908,7 +877,7 @@ document
 
 
 /* =========================
-   START DASHBOARD
+   START
 ========================= */
 
 loadDashboard();
@@ -917,3 +886,4 @@ loadDashboard();
 
 </body>
 </html>
+</main>
