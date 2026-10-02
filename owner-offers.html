@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B6E4F">
+<title>Offers - Ruhia Upazila Bazar</title>
+<style>
+:root{--g:#0B6E4F;--g2:#14966e;--bg:#f3faf7;--text:#15352b;--muted:#678078;--border:#dcebe5;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eaf8f2,#f7fbfa 300px);color:var(--text);font-family:Arial,sans-serif}a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}
+.top{position:sticky;top:0;z-index:10;background:#0B6E4F;color:#fff;padding:14px 16px}.topin{max-width:760px;margin:auto;display:flex;align-items:center;gap:12px}.back{width:42px;height:42px;border-radius:13px;background:#ffffff22;display:grid;place-items:center;font-size:21px}.brand{font-weight:800}.sub{font-size:12px;opacity:.85}
+main{max-width:760px;margin:auto;padding:18px 14px 42px}.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:24px;padding:22px 18px;margin-bottom:16px}.hero h1{margin:0 0 6px;font-size:25px}.hero p{margin:0;opacity:.9}
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:17px;margin-bottom:15px;box-shadow:0 7px 20px #0b6e4f0f}.card h2{font-size:18px;margin:0 0 13px}.field{margin-bottom:13px}label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+input,textarea,select{width:100%;border:1px solid #cfe2db;border-radius:13px;padding:12px 13px;outline:none;background:#fbfefd;color:var(--text)}textarea{min-height:95px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{width:100%;border:0;border-radius:14px;padding:13px 15px;font-weight:800;cursor:pointer}.primary{background:var(--g);color:#fff}.secondary{background:#edf7f3;color:var(--g);border:1px solid #cfe7dd}.danger{background:#fff0f0;color:var(--red);border:1px solid #fecaca}
+.msg{display:none;border-radius:12px;padding:11px 13px;margin-bottom:13px;font-size:14px;font-weight:700}.msg.ok{display:block;background:#e9f8ef;color:#12633e}.msg.error{display:block;background:#fff0f0;color:#a51d1d}.empty{text-align:center;padding:24px 10px;color:var(--muted)}
+.offer{border:1px solid var(--border);border-radius:17px;padding:14px;margin-top:11px;background:#fcfffe}.offerTop{display:flex;gap:12px}.offerImg{width:82px;height:82px;flex:0 0 82px;border-radius:14px;object-fit:cover;background:#e8f3ef}.placeholder{display:grid;place-items:center;font-size:28px}.offerName{font-size:18px;font-weight:800}.discount{display:inline-block;margin-top:3px;background:#fff4d6;color:#8a5a00;padding:4px 9px;border-radius:20px;font-weight:800;font-size:13px}.meta{font-size:12px;color:var(--muted);margin-top:6px}.desc{font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.actions button{padding:10px;border-radius:11px}.hint{font-size:12px;color:var(--muted);margin-top:5px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><a class="back" href="owner-dashboard.html">←</a><div><div class="brand">RUHIA UPAZILA BAZAR</div><div class="sub">Offers</div></div></div></header>
+<main>
+<section class="hero"><h1>🎁 অফার পরিচালনা</h1><p>আপনার দোকানের বিশেষ অফার তৈরি করুন এবং Edit বা Delete করুন।</p></section>
+<div id="msg" class="msg"></div>
+<section class="card">
+<h2 id="formTitle">➕ নতুন অফার যোগ করুন</h2>
+<form id="offerForm">
+<div class="field"><label for="offerTitle">অফারের নাম *</label><input id="offerTitle" required placeholder="যেমন: ঈদ উপলক্ষে ২০% ছাড়"></div>
+<div class="row">
+<div class="field"><label for="discount">Discount</label><input id="discount" placeholder="যেমন: 20% বা ৳100"></div>
+<div class="field"><label for="status">স্ট্যাটাস</label><select id="status"><option value="active">Active — পাবলিক সাইটে দেখাবে</option><option value="inactive">Inactive — এখন দেখাবে না</option></select></div>
+</div>
+<div class="row">
+<div class="field"><label for="startDate">শুরু</label><input id="startDate" type="date"></div>
+<div class="field"><label for="endDate">শেষ</label><input id="endDate" type="date"></div>
+</div>
+<div class="field"><label for="imageUrl">ছবির URL (ঐচ্ছিক)</label><input id="imageUrl" type="url" placeholder="https://..."><div class="hint">এখন URL ব্যবহার করা হচ্ছে। পরে সরাসরি ছবি Upload যোগ করা যাবে।</div></div>
+<div class="field"><label for="description">অফারের বিস্তারিত</label><textarea id="description" placeholder="অফারটি কীভাবে পাওয়া যাবে বা কী শর্ত আছে লিখুন"></textarea></div>
+<button id="saveBtn" class="btn primary" type="submit">💾 অফার Save করুন</button>
+<button id="cancelBtn" class="btn secondary" type="button" style="display:none;margin-top:8px">✖ Edit বাতিল</button>
+</form>
+</section>
+<section class="card"><h2>📋 আমার অফার</h2><div id="list">লোড হচ্ছে...</div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+let currentShop=null,editingId=null;
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function showMsg(t,type="ok"){const b=$("msg");b.textContent=t;b.className="msg "+type;scrollTo({top:0,behavior:"smooth"})}
+function resetForm(){editingId=null;$("offerForm").reset();$("status").value="active";$("formTitle").textContent="➕ নতুন অফার যোগ করুন";$("saveBtn").textContent="💾 অফার Save করুন";$("cancelBtn").style.display="none"}
+async function init(){
+if(!window.supabaseClient){$("list").innerHTML='<div class="empty">Supabase সংযোগ পাওয়া যাচ্ছে না।</div>';return}
+const {data,error}=await window.supabaseClient.auth.getSession();
+if(error||!data.session){location.href="owner-login.html";return}
+const {data:shop,error:se}=await window.supabaseClient.from("shops").select("id,shop_name").eq("owner_id",data.session.user.id).maybeSingle();
+if(se){$("list").innerHTML='<div class="empty">দোকানের তথ্য লোড করা যায়নি।</div>';return}
+if(!shop){$("offerForm").style.display="none";$("list").innerHTML='<div class="empty">আগে দোকানের তথ্য Save করুন।<br><br><a href="owner-shop.html" style="color:#0B6E4F;font-weight:800">🏪 My Shop-এ যান</a></div>';return}
+currentShop=shop;await loadOffers()
+}
+async function loadOffers(){
+const {data,error}=await window.supabaseClient.from("offers").select("*").eq("shop_id",currentShop.id).order("created_at",{ascending:false});
+if(error){console.error(error);$("list").innerHTML='<div class="empty">Offers table-এর field যাচাই করা দরকার।<br><small>'+esc(error.message)+'</small></div>';return}
+if(!data?.length){$("list").innerHTML='<div class="empty">এখনো কোনো অফার যোগ করা হয়নি।</div>';return}
+$("list").innerHTML=data.map(o=>{
+const title=o.title||o.offer_title||o.name||"অফারের নাম নেই",img=o.image_url||o.photo_url||o.image,discount=o.discount||o.discount_text||"Discount উল্লেখ নেই",start=o.start_date||o.starts_at||"",end=o.end_date||o.ends_at||"",active=String(o.status||"active").toLowerCase()==="active";
+return `<article class="offer"><div class="offerTop">${img?`<img class="offerImg" src="${esc(img)}" alt="${esc(title)}">`:`<div class="offerImg placeholder">🎁</div>`}<div><div class="offerName">${esc(title)}</div><div class="discount">${esc(discount)}</div><div class="meta">${active?"🟢 Active":"⚪ Inactive"}</div></div></div>${start||end?`<div class="meta">📅 ${esc(start)} ${end?"→ "+esc(end):""}</div>`:""}${o.description?`<div class="desc">${esc(o.description)}</div>`:""}<div class="actions"><button class="btn secondary" type="button" onclick="editOffer('${esc(o.id)}')">✏️ Edit</button><button class="btn danger" type="button" onclick="deleteOffer('${esc(o.id)}')">🗑️ Delete</button></div></article>`
+}).join("")
+}
+$("offerForm").addEventListener("submit",async e=>{
+e.preventDefault();if(!currentShop){showMsg("আগে দোকানের তথ্য তৈরি করুন।","error");return}
+const title=$("offerTitle").value.trim();if(!title){showMsg("অফারের নাম দিন।","error");return}
+const payload={shop_id:currentShop.id,title,discount:$("discount").value.trim()||null,description:$("description").value.trim()||null,image_url:$("imageUrl").value.trim()||null,start_date:$("startDate").value||null,end_date:$("endDate").value||null,status:$("status").value};
+$("saveBtn").disabled=true;$("saveBtn").textContent=editingId?"⏳ Update হচ্ছে...":"⏳ Save হচ্ছে...";
+const result=editingId?await window.supabaseClient.from("offers").update(payload).eq("id",editingId).eq("shop_id",currentShop.id):await window.supabaseClient.from("offers").insert(payload);
+$("saveBtn").disabled=false;
+if(result.error){console.error(result.error);showMsg("Save করা যায়নি: "+result.error.message,"error");$("saveBtn").textContent=editingId?"💾 Update করুন":"💾 অফার Save করুন";return}
+showMsg(editingId?"অফার সফলভাবে Update হয়েছে।":"অফার সফলভাবে যোগ হয়েছে।");resetForm();await loadOffers()
+});
+async function editOffer(id){
+const {data,error}=await window.supabaseClient.from("offers").select("*").eq("id",id).eq("shop_id",currentShop.id).maybeSingle();
+if(error||!data){showMsg("অফারটি পাওয়া যায়নি।","error");return}
+editingId=data.id;$("offerTitle").value=data.title||data.offer_title||data.name||"";$("discount").value=data.discount||data.discount_text||"";$("description").value=data.description||"";$("imageUrl").value=data.image_url||data.photo_url||data.image||"";$("startDate").value=data.start_date||(data.starts_at?String(data.starts_at).slice(0,10):"");$("endDate").value=data.end_date||(data.ends_at?String(data.ends_at).slice(0,10):"");$("status").value=data.status||"active";$("formTitle").textContent="✏️ অফার Edit করুন";$("saveBtn").textContent="💾 Update করুন";$("cancelBtn").style.display="block";scrollTo({top:0,behavior:"smooth"})
+}
+async function deleteOffer(id){
+if(!confirm("এই অফারটি Delete করতে চান?"))return;
+const {error}=await window.supabaseClient.from("offers").delete().eq("id",id).eq("shop_id",currentShop.id);
+if(error){showMsg("Delete করা যায়নি: "+error.message,"error");return}
+showMsg("অফার Delete হয়েছে।");await loadOffers()
+}
+$("cancelBtn").addEventListener("click",resetForm);
+init();
+</script>
+</body>
+</html>
