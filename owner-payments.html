@@ -1,1 +1,490 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Payments</title><style>body{font-family:Arial;background:#f4f8f5;color:#173b2d;margin:0}.w{max-width:700px;margin:auto;padding:18px}.h,.box{background:#fff;border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 5px 18px #0001}.h{background:#0b6e4f;color:#fff}input,select,button{width:100%;padding:13px;margin:6px 0;box-sizing:border-box;border-radius:12px;border:1px solid #ccd8d2}button{background:#0b6e4f;color:#fff;border:0;font-weight:700}.note{background:#fff8df;padding:12px;border-radius:12px}.item{border-top:1px solid #eee;padding:11px 0}.back{color:#0b6e4f;font-weight:700}</style></head><body><main class="w"><div class="h"><h2>💰 Payments</h2><div id="shop">লোড হচ্ছে...</div></div><div class="box"><div class="note">bKash বা Nagad-এ Send Money করার পর নম্বর ও TrxID দিন। প্রথমে pending থাকবে।</div><select id="pkg"><option value="499">৳499 Package</option><option value="999">৳999 Package</option></select><select id="method"><option>bKash</option><option>Nagad</option></select><input id="sender" placeholder="Send Money নম্বর"><input id="trx" placeholder="Transaction ID (TrxID)"><button id="send">Payment তথ্য জমা দিন</button><p id="msg"></p></div><div class="box"><h3>Payment History</h3><div id="list">লোড হচ্ছে...</div></div><a class="back" href="owner-dashboard.html">← Dashboard</a></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script>let u,s;async function init(){const{data:{session}}=await supabaseClient.auth.getSession();if(!session){location.href='owner-login.html';return}u=session.user;const r=await supabaseClient.from('shops').select('id,shop_name').eq('owner_id',u.id).order('id',{ascending:false}).limit(1).maybeSingle();s=r.data;if(!s){shop.textContent='আগে My Shop-এ দোকানের তথ্য সংরক্ষণ করুন।';send.disabled=true}else{shop.textContent='দোকান: '+s.shop_name;load()}}send.onclick=async()=>{if(!s)return;const p=pkg.value,m=method.value,sn=sender.value.trim(),t=trx.value.trim();if(!sn||!t){msg.textContent='নম্বর এবং TrxID দিন।';return}const{error}=await supabaseClient.from('payments').insert({shop_id:s.id,owner_id:u.id,package_type:p,amount:Number(p),method:m,sender_number:sn,trx_id:t,status:'pending'});msg.textContent=error?error.message:'Payment তথ্য সফলভাবে জমা হয়েছে।';if(!error){sender.value='';trx.value='';load()}};async function load(){const{data,error}=await supabaseClient.from('payments').select('*').eq('owner_id',u.id).eq('shop_id',s.id).order('created_at',{ascending:false});if(error){list.textContent=error.message;return}list.innerHTML=data?.length?data.map(x=>`<div class="item"><b>৳${x.amount}</b> • ${x.method} • ${x.status}<br>TrxID: ${x.trx_id}<br><small>${new Date(x.created_at).toLocaleString('bn-BD')}</small></div>`).join(''):'এখনো কোনো payment নেই।'}init();</script></body></html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payments | Ruhia Upazila Bazar</title>
+
+<style>
+body{
+margin:0;
+background:#f4f8f5;
+font-family:Arial,"Noto Sans Bengali",sans-serif;
+color:#173b2d
+}
+
+.wrap{
+max-width:720px;
+margin:auto;
+padding:18px
+}
+
+.head,.box{
+background:#fff;
+border-radius:20px;
+padding:20px;
+margin-bottom:14px;
+box-shadow:0 5px 18px #0001
+}
+
+.head{
+background:#0b6e4f;
+color:#fff
+}
+
+.payment-number{
+background:#e9fff3;
+border:2px solid #0b6e4f;
+border-radius:16px;
+padding:18px;
+margin:15px 0
+}
+
+.number{
+font-size:25px;
+font-weight:800;
+color:#0b6e4f;
+letter-spacing:1px
+}
+
+.method{
+font-weight:700;
+margin-top:5px
+}
+
+input,select,button{
+width:100%;
+padding:13px;
+margin:6px 0;
+border:1px solid #ccd8d2;
+border-radius:12px;
+font-size:15px;
+box-sizing:border-box
+}
+
+button{
+background:#0b6e4f;
+color:#fff;
+border:0;
+font-weight:700
+}
+
+.item{
+border-top:1px solid #eee;
+padding:12px 0
+}
+
+.back{
+display:block;
+color:#0b6e4f;
+font-weight:700;
+text-decoration:none;
+margin:18px 0
+}
+
+.note{
+background:#fff8df;
+padding:12px;
+border-radius:12px
+}
+
+.copy{
+background:#159a6b;
+margin-top:10px
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="head">
+<h2>💰 Payments</h2>
+<p id="shop">লোড হচ্ছে...</p>
+</div>
+
+
+<!-- PAYMENT NUMBER -->
+
+<div class="box">
+
+<h3>💳 Payment করুন</h3>
+
+<div class="payment-number">
+
+<div class="method">📱 bKash</div>
+
+<div class="number">
+01771332609
+</div>
+
+<button
+class="copy"
+onclick="copyNumber()">
+📋 নম্বর Copy করুন
+</button>
+
+</div>
+
+
+<div class="payment-number">
+
+<div class="method">📱 Nagad</div>
+
+<div class="number">
+01771332609
+</div>
+
+<button
+class="copy"
+onclick="copyNumber()">
+📋 নম্বর Copy করুন
+</button>
+
+</div>
+
+
+<div class="note">
+
+<b>Payment করার নিয়ম:</b>
+
+<br><br>
+
+১. উপরের নম্বরে <b>Send Money</b> করুন।
+
+<br>
+
+২. যে নম্বর থেকে টাকা পাঠিয়েছেন সেটি লিখুন।
+
+<br>
+
+৩. Transaction ID (TrxID) লিখুন।
+
+<br>
+
+৪. তারপর নিচে Payment তথ্য Submit করুন।
+
+<br><br>
+
+Payment প্রথমে <b>Pending</b> থাকবে।
+Payment যাচাই করার পর Approve করা হবে।
+
+</div>
+
+</div>
+
+
+<!-- PAYMENT FORM -->
+
+<div class="box">
+
+<h3>Payment তথ্য জমা দিন</h3>
+
+<select id="pkg">
+
+<option value="499">
+৳499 Package
+</option>
+
+<option value="999">
+৳999 Package
+</option>
+
+</select>
+
+
+<select id="method">
+
+<option>
+bKash
+</option>
+
+<option>
+Nagad
+</option>
+
+</select>
+
+
+<input
+id="sender"
+placeholder="যে নম্বর থেকে Send Money করেছেন">
+
+
+<input
+id="trx"
+placeholder="Transaction ID (TrxID)">
+
+
+<button id="submit">
+Payment তথ্য জমা দিন
+</button>
+
+<div id="msg"></div>
+
+</div>
+
+
+<!-- HISTORY -->
+
+<div class="box">
+
+<h3>Payment History</h3>
+
+<div id="list">
+লোড হচ্ছে...
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="owner-dashboard.html">
+
+← Dashboard
+
+</a>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase-config.js"></script>
+
+
+<script>
+
+let user,shop;
+
+
+async function init(){
+
+const {
+data:{session}
+}=await supabaseClient.auth.getSession();
+
+
+if(!session){
+
+location.href="owner-login.html";
+
+return;
+
+}
+
+
+user=session.user;
+
+
+const r=
+await supabaseClient
+.from("shops")
+.select("id,shop_name")
+.eq("owner_id",user.id)
+.order("id",{ascending:false})
+.limit(1)
+.maybeSingle();
+
+
+shop=r.data;
+
+
+if(!shop){
+
+document.getElementById("shop").textContent=
+"আগে My Shop-এ দোকানের তথ্য সংরক্ষণ করুন।";
+
+document.getElementById("submit").disabled=true;
+
+}else{
+
+document.getElementById("shop").textContent=
+"দোকান: "+shop.shop_name;
+
+load();
+
+}
+
+}
+
+
+async function submitPay(){
+
+if(!shop)return;
+
+
+const pkg=
+document.getElementById("pkg").value;
+
+const method=
+document.getElementById("method").value;
+
+const sender=
+document.getElementById("sender").value.trim();
+
+const trx=
+document.getElementById("trx").value.trim();
+
+
+if(!sender||!trx){
+
+document.getElementById("msg").textContent=
+"নম্বর এবং TrxID দুটোই দিন।";
+
+return;
+
+}
+
+
+const {error}=
+
+await supabaseClient
+.from("payments")
+.insert({
+
+shop_id:shop.id,
+
+owner_id:user.id,
+
+package_type:pkg,
+
+amount:Number(pkg),
+
+method:method,
+
+sender_number:sender,
+
+trx_id:trx,
+
+status:"pending"
+
+});
+
+
+document.getElementById("msg").textContent=
+
+error
+?error.message
+:"Payment তথ্য সফলভাবে জমা হয়েছে।";
+
+
+if(!error){
+
+document.getElementById("sender").value="";
+
+document.getElementById("trx").value="";
+
+load();
+
+}
+
+}
+
+
+async function load(){
+
+const {data,error}=
+
+await supabaseClient
+.from("payments")
+.select("*")
+.eq("owner_id",user.id)
+.eq("shop_id",shop.id)
+.order("created_at",{ascending:false});
+
+
+const el=
+document.getElementById("list");
+
+
+if(error){
+
+el.textContent=error.message;
+
+return;
+
+}
+
+
+if(!data?.length){
+
+el.textContent=
+"এখনো কোনো payment জমা দেওয়া হয়নি।";
+
+return;
+
+}
+
+
+el.innerHTML=
+
+data.map(x=>`
+
+<div class="item">
+
+<b>৳${x.amount}</b>
+
+•
+
+${x.method}
+
+•
+
+<b>${x.status}</b>
+
+<br>
+
+TrxID:
+${esc(x.trx_id)}
+
+<br>
+
+<small>
+${new Date(x.created_at).toLocaleString("bn-BD")}
+</small>
+
+</div>
+
+`).join("");
+
+}
+
+
+function copyNumber(){
+
+navigator.clipboard.writeText("01771332609");
+
+alert("Payment নম্বর Copy হয়েছে: 01771332609");
+
+}
+
+
+function esc(s){
+
+return String(s).replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
+
+}
+
+
+document.getElementById("submit").onclick=
+submitPay;
+
+
+init();
+
+</script>
+
+</body>
+</html>
