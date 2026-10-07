@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login | Ruhia Upazila Bazar</title>
+<style>
+body{margin:0;background:#eef7f2;font-family:Arial,"Noto Sans Bengali",sans-serif;color:#173b2d}.wrap{max-width:440px;margin:auto;padding:25px}.box{background:#fff;padding:24px;border-radius:22px;box-shadow:0 8px 25px #0001;margin-top:60px}input,button{width:100%;box-sizing:border-box;padding:14px;margin:7px 0;border-radius:12px;font-size:16px}input{border:1px solid #ccd8d2}button{border:0;background:#0b6e4f;color:#fff;font-weight:700}.err{color:#b71c1c}.muted{color:#66756e;font-size:14px}
+</style></head><body><div class="wrap"><div class="box"><h2>🔐 Admin Login</h2><p class="muted">Ruhia Upazila Bazar Control Panel</p>
+<input id="email" type="email" placeholder="Admin Email"><input id="password" type="password" placeholder="Password">
+<button id="login">Login</button><p id="msg" class="err"></p></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+document.getElementById("login").onclick=async()=>{const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
+const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+if(error){document.getElementById("msg").textContent=error.message;return}
+const r=await supabaseClient.from("site_admins").select("user_id").eq("user_id",data.user.id).eq("role","admin").maybeSingle();
+if(r.error||!r.data){await supabaseClient.auth.signOut();document.getElementById("msg").textContent="এই account-এর Admin access নেই।";return}
+location.href="admin-dashboard.html";};
+</script></body></html>

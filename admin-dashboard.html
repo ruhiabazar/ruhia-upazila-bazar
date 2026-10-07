@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard | Ruhia Upazila Bazar</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f7f4;font-family:Arial,"Noto Sans Bengali",sans-serif;color:#173b2d}.top{background:#0b6e4f;color:#fff;padding:18px}.wrap{max-width:1000px;margin:auto;padding:15px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card,.panel{background:#fff;border-radius:18px;padding:16px;box-shadow:0 5px 18px #0001;margin-bottom:14px}.num{font-size:27px;font-weight:800;color:#0b6e4f}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:12px}.tabs button{white-space:nowrap;width:auto}.tabs button,button{padding:11px 14px;border:0;border-radius:11px;background:#0b6e4f;color:#fff;font-weight:700}.danger{background:#c62828!important}.muted{color:#66756e}.item{border-top:1px solid #eee;padding:13px 0}.item:first-child{border-top:0}.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:0 0 auto}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;padding:10px;border-bottom:1px solid #eee;font-size:14px}.status{font-weight:700}.hidden{display:none}.ok{color:#087f5b}.err{color:#b71c1c}@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.wrap{padding:10px}table{min-width:700px}}
+</style></head><body>
+<div class="top"><div class="wrap"><h2>🛠️ Ruhia Upazila Bazar — Admin</h2><div id="adminEmail">Checking...</div></div></div>
+<div class="wrap">
+<div class="grid"><div class="card">🏪 Shops<div class="num" id="shopsN">0</div></div><div class="card">💰 Pending Payments<div class="num" id="pendingN">0</div></div><div class="card">🚀 Promotions<div class="num" id="promoN">0</div></div><div class="card">📊 Events<div class="num" id="eventsN">0</div></div></div>
+<div class="tabs"><button onclick="show('payments')">💰 Payments</button><button onclick="show('shops')">🏪 Shops</button><button onclick="show('promos')">🚀 Promotions</button><button onclick="show('events')">📊 Analytics</button><button onclick="logout()" class="danger">Logout</button></div>
+<div id="msg"></div>
+<section id="payments" class="panel"><h3>💰 Payment Management</h3><div id="paymentsList">লোড হচ্ছে...</div></section>
+<section id="shops" class="panel hidden"><h3>🏪 Shop Management</h3><div id="shopsList">লোড হচ্ছে...</div></section>
+<section id="promos" class="panel hidden"><h3>🚀 Promotion Management</h3><div id="promosList">লোড হচ্ছে...</div></section>
+<section id="events" class="panel hidden"><h3>📊 Analytics Events</h3><div id="eventsList">লোড হচ্ছে...</div></section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+let user=null,shops=[],payments=[],promos=[],events=[];
+async function init(){
+ const {data:{session}}=await supabaseClient.auth.getSession();
+ if(!session){location.href="admin-login.html";return}
+ user=session.user;document.getElementById("adminEmail").textContent=user.email||"Admin";
+ const a=await supabaseClient.from("site_admins").select("user_id").eq("user_id",user.id).eq("role","admin").maybeSingle();
+ if(a.error||!a.data){await supabaseClient.auth.signOut();location.href="admin-login.html";return}
+ await loadAll();
+}
+async function loadAll(){
+ const [s,p,r,e]=await Promise.all([
+  supabaseClient.from("shops").select("id,owner_id,shop_name,category,status,package_type,package_started_at,package_expires_at,created_at").order("created_at",{ascending:false}),
+  supabaseClient.from("payments").select("*").order("created_at",{ascending:false}),
+  supabaseClient.from("promotions").select("*").order("created_at",{ascending:false}),
+  supabaseClient.from("analytics_events").select("*").order("created_at",{ascending:false}).limit(200)
+ ]);
+ if(s.error){showMsg(s.error.message,true);return} if(p.error){showMsg(p.error.message,true);return}
+ shops=s.data||[];payments=p.data||[];promos=r.data||[];events=e.data||[];
+ document.getElementById("shopsN").textContent=shops.length;
+ document.getElementById("pendingN").textContent=payments.filter(x=>x.status==="pending").length;
+ document.getElementById("promoN").textContent=promos.filter(x=>x.status==="active").length;
+ document.getElementById("eventsN").textContent=events.length;
+ renderPayments();renderShops();renderPromos();renderEvents();
+}
+function renderPayments(){
+ const el=document.getElementById("paymentsList");
+ if(!payments.length){el.textContent="কোনো payment নেই।";return}
+ el.innerHTML=payments.map(x=>`<div class="item"><b>৳${x.amount??""}</b> — ${esc(x.package_type||"")} — ${esc(x.payment_method||x.method||"")}<br>TrxID: ${esc(x.transaction_id||x.trx_id||"")}<br>Sender: ${esc(x.sender_number||"")}<br>Status: <span class="status">${esc(x.status||"")}</span><br>${x.shop_id?"Shop ID: "+x.shop_id:""}<div class="row">${x.status==="pending"?`<button onclick="approve(${x.id})">✅ Approve</button><button class="danger" onclick="rejectPay(${x.id})">❌ Reject</button>`:""}</div></div>`).join("");
+}
+function renderShops(){
+ const el=document.getElementById("shopsList"); if(!shops.length){el.textContent="কোনো shop নেই।";return}
+ el.innerHTML=`<div class="tablewrap"><table><tr><th>ID</th><th>Shop</th><th>Category</th><th>Status</th><th>Package</th><th>Expiry</th><th>Action</th></tr>`+
+ shops.map(x=>`<tr><td>${x.id}</td><td>${esc(x.shop_name||"")}</td><td>${esc(x.category||"")}</td><td>${esc(x.status||"")}</td><td>${esc(x.package_type||"—")}</td><td>${x.package_expires_at?new Date(x.package_expires_at).toLocaleDateString("bn-BD"):"—"}</td><td><button onclick="toggleShop(${x.id},'${x.status==="inactive"?"active":"inactive"}')">${x.status==="inactive"?"Activate":"Disable"}</button></td></tr>`).join("")+"</table></div>";
+}
+function renderPromos(){
+ const el=document.getElementById("promosList");if(!promos.length){el.textContent="কোনো promotion নেই।";return}
+ el.innerHTML=promos.map(x=>`<div class="item">Shop ID: ${x.shop_id??"—"} — ৳${x.amount??"—"} — ${esc(x.package_type||"")} — <b>${esc(x.status||"")}</b><br>Start: ${x.started_at?new Date(x.started_at).toLocaleString("bn-BD"):"—"} | End: ${x.expires_at?new Date(x.expires_at).toLocaleString("bn-BD"):"—"}</div>`).join("");
+}
+function renderEvents(){
+ const el=document.getElementById("eventsList");if(!events.length){el.textContent="এখনো analytics event নেই।";return}
+ el.innerHTML=`<div class="tablewrap"><table><tr><th>Time</th><th>Shop</th><th>Event</th><th>Page</th></tr>`+events.map(x=>`<tr><td>${x.created_at?new Date(x.created_at).toLocaleString("bn-BD"):""}</td><td>${x.shop_id??"—"}</td><td>${esc(x.event_type||"")}</td><td>${esc(x.page_path||"")}</td></tr>`).join("")+"</table></div>";
+}
+async function approve(id){
+ if(!confirm("এই payment Approve করবেন? এতে package 30 দিন Active হবে।"))return;
+ const r=await supabaseClient.rpc("admin_approve_payment",{p_payment_id:id});
+ if(r.error){showMsg(r.error.message,true);return}showMsg("Payment approved — Package 30 দিন Active হয়েছে।");await loadAll();
+}
+async function rejectPay(id){
+ const note=prompt("Reject note (optional):","Payment rejected by admin");if(note===null)return;
+ const r=await supabaseClient.rpc("admin_reject_payment",{p_payment_id:id,p_note:note||"Payment rejected by admin"});
+ if(r.error){showMsg(r.error.message,true);return}showMsg("Payment rejected.");await loadAll();
+}
+async function toggleShop(id,status){
+ const r=await supabaseClient.from("shops").update({status,updated_at:new Date().toISOString()}).eq("id",id);
+ if(r.error){showMsg(r.error.message,true);return}showMsg("Shop status updated.");await loadAll();
+}
+function show(id){["payments","shops","promos","events"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id))}
+function showMsg(t,err=false){const e=document.getElementById("msg");e.className=err?"err":"ok";e.textContent=t;setTimeout(()=>e.textContent="",4000)}
+async function logout(){await supabaseClient.auth.signOut();location.href="admin-login.html"}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+init();
+</script></body></html>
