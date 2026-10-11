@@ -6,553 +6,239 @@
 <meta name="theme-color" content="#0B6E4F">
 <title>Ruhia Upazila Bazar</title>
 <meta name="description" content="রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
+<style>
+.live-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.live-card{background:#fff;border:1px solid #e1ece7;border-radius:17px;padding:14px;display:flex;gap:12px;box-shadow:0 5px 16px #10251d08;min-width:0}
+.live-card img,.live-placeholder{width:88px;height:88px;flex:0 0 88px;object-fit:cover;border-radius:13px;background:#e8f6f0}
+.live-placeholder{display:grid;place-items:center;font-size:30px}
+.live-info{min-width:0;flex:1}
+.live-info h3{font-size:17px;margin:0 0 3px;line-height:1.3}
+.live-info p{font-size:12px;color:#66766e;margin:4px 0;overflow-wrap:anywhere}
+.live-tag{display:inline-block;background:#e5f7ee;color:#0B6E4F;border-radius:99px;padding:3px 8px;font-size:11px;font-weight:700}
+#shopStatus,#offerStatus,#featuredStatus{font-size:12px;color:#66766e;margin:0 0 10px}
+@media(min-width:650px){.live-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
 </head>
-
 <body>
 
-<header class="top">
-  <div class="top-in">
-
-    <a class="brand" href="index.html">
-      <span class="logo">
-        <b>R</b>
-        <b>B</b>
-        <i>⌂</i>
-      </span>
-
-      <span>
-        <strong>Ruhia</strong>
-        <small>Upazila Bazar</small>
-      </span>
-    </a>
-
-    <a class="owner" href="owner-login.html">
-      Owner Login
-    </a>
-
-  </div>
-</header>
-
-
-<section class="hero">
-
-  <div class="hero-in wrap">
-
-    <span class="location">
-      📍 Ruhia • Thakurgaon
-    </span>
-
-    <h1>
-      রুহিয়ার ব্যবসা,<br>
-      <em>অফার ও সেবা</em>—এক জায়গায়
-    </h1>
-
-    <p>
-      কাছাকাছি দোকান, পণ্য, সেবা ও অফার সহজেই খুঁজে নিন।
-    </p>
-
-    <div class="search">
-
-      <span>⌕</span>
-
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="দোকান, পণ্য, সেবা বা ক্যাটাগরি"
-      >
-
-      <button id="searchBtn">
-        খুঁজুন
-      </button>
-
-    </div>
-
-    <div class="quick">
-
-      <button data-cat="মুদিখানা">
-        🛒 মুদিখানা
-      </button>
-
-      <button data-cat="কসমেটিকস">
-        💄 কসমেটিকস
-      </button>
-
-      <button data-cat="রেস্টুরেন্ট ও খাবার">
-        🍲 খাবার
-      </button>
-
-      <button data-cat="মোবাইল ও কম্পিউটার">
-        📱 মোবাইল
-      </button>
-
-      <button data-cat="ফার্মেসি">
-        💊 ফার্মেসি
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="promo">
-
-  <div class="wrap">
-
-    <div class="promo-card">
-
-      <div class="promo-icon">
-        🏪
-      </div>
-
-      <div>
-
-        <label>SHOP OWNER</label>
-
-        <h2>
-          আপনার দোকান যুক্ত করুন
-        </h2>
-
-        <p>
-          তথ্য, ছবি, পণ্য/সেবা ও অফার নিজেই পরিচালনা করুন।
-        </p>
-
-      </div>
-
-      <a href="owner-register.html">
-        দোকান যুক্ত করুন <b>→</b>
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="categories" class="section">
-
-  <div class="wrap">
-
-    <div class="head">
-
-      <div>
-        <label>BROWSE</label>
-        <h2>সব ক্যাটাগরি</h2>
-      </div>
-
-      <span>27টি</span>
-
-    </div>
-
-
-    <div class="cats">
-
-      <button data-cat="মুদিখানা">
-        <i>🛒</i>
-        মুদিখানা
-      </button>
-
-      <button data-cat="পোশাক ও ফ্যাশন">
-        <i>👗</i>
-        পোশাক ও ফ্যাশন
-      </button>
-
-      <button data-cat="জুতা ও ব্যাগ">
-        <i>👞</i>
-        জুতা ও ব্যাগ
-      </button>
-
-      <button data-cat="কসমেটিকস">
-        <i>💄</i>
-        কসমেটিকস
-      </button>
-
-      <button data-cat="জুয়েলারি">
-        <i>💍</i>
-        জুয়েলারি
-      </button>
-
-      <button data-cat="মোবাইল ও কম্পিউটার">
-        <i>📱</i>
-        মোবাইল ও কম্পিউটার
-      </button>
-
-      <button data-cat="ইলেকট্রনিক্স">
-        <i>💻</i>
-        ইলেকট্রনিক্স
-      </button>
-
-      <button data-cat="রেস্টুরেন্ট ও খাবার">
-        <i>🍲</i>
-        রেস্টুরেন্ট ও খাবার
-      </button>
-
-      <button data-cat="বেকারি ও মিষ্টি">
-        <i>🧁</i>
-        বেকারি ও মিষ্টি
-      </button>
-
-      <button data-cat="ফার্মেসি">
-        <i>💊</i>
-        ফার্মেসি
-      </button>
-
-      <button data-cat="ডাক্তার ও ক্লিনিক">
-        <i>🩺</i>
-        ডাক্তার ও ক্লিনিক
-      </button>
-
-      <button data-cat="বিউটি ও সেলুন">
-        <i>💇</i>
-        বিউটি ও সেলুন
-      </button>
-
-      <button data-cat="শিক্ষা">
-        <i>📚</i>
-        শিক্ষা
-      </button>
-
-      <button data-cat="কোচিং সেন্টার">
-        <i>🎓</i>
-        কোচিং সেন্টার
-      </button>
-
-      <button data-cat="সার্ভিসেস">
-        <i>🛠️</i>
-        সার্ভিসেস
-      </button>
-
-      <button data-cat="প্রিন্টিং ও ফটোকপি">
-        <i>🖨️</i>
-        প্রিন্টিং ও ফটোকপি
-      </button>
-
-      <button data-cat="ফটোগ্রাফি ও স্টুডিও">
-        <i>📸</i>
-        ফটোগ্রাফি ও স্টুডিও
-      </button>
-
-      <button data-cat="হার্ডওয়্যার ও নির্মাণ সামগ্রী">
-        <i>🔧</i>
-        হার্ডওয়্যার ও নির্মাণ
-      </button>
-
-      <button data-cat="ফার্নিচার">
-        <i>🪑</i>
-        ফার্নিচার
-      </button>
-
-      <button data-cat="অটো, গাড়ি ও পরিবহন">
-        <i>🚗</i>
-        অটো, গাড়ি ও পরিবহন
-      </button>
-
-      <button data-cat="বাইক/গাড়ির পার্টস ও সার্ভিস">
-        <i>🏍️</i>
-        বাইক/গাড়ির পার্টস
-      </button>
-
-      <button data-cat="কৃষি ও কৃষি সামগ্রী">
-        <i>🌾</i>
-        কৃষি ও কৃষি সামগ্রী
-      </button>
-
-      <button data-cat="গবাদিপশু ও পোলট্রি">
-        <i>🐄</i>
-        গবাদিপশু ও পোলট্রি
-      </button>
-
-      <button data-cat="জমি, বাড়ি ও রিয়েল এস্টেট">
-        <i>🏠</i>
-        জমি, বাড়ি ও রিয়েল এস্টেট
-      </button>
-
-      <button data-cat="ব্যবসায়িক ও পেশাগত সেবা">
-        <i>💼</i>
-        ব্যবসায়িক ও পেশাগত সেবা
-      </button>
-
-      <button data-cat="ইভেন্ট ও ডেকোরেশন">
-        <i>🎉</i>
-        ইভেন্ট ও ডেকোরেশন
-      </button>
-
-      <button data-cat="হোম সার্ভিস">
-        <i>🧹</i>
-        হোম সার্ভিস
-      </button>
-
-    </div>
-
-  </div>
-
-</section><section id="shops" class="section tint">
-
-  <div class="wrap">
-
-    <div class="head">
-
-      <div>
-        <label>DIRECTORY</label>
-        <h2>দোকান ও ব্যবসা</h2>
-      </div>
-
-    </div>
-
-
-    <div class="empty">
-
-      <div>🏪</div>
-
-      <h3>
-        এখনো কোনো দোকান যুক্ত হয়নি
-      </h3>
-
-      <p>
-        বাস্তব Shop Owner-রা দোকান যুক্ত করলে
-        অনুমোদিত দোকান এখানে দেখা যাবে।
-      </p>
-
-      <a href="owner-register.html">
-        প্রথম দোকান যুক্ত করুন →
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="offers" class="section">
-
-  <div class="wrap">
-
-    <div class="head">
-
-      <div>
-        <label>OFFERS</label>
-        <h2>চলমান অফার</h2>
-      </div>
-
-    </div>
-
-
-    <div class="empty small">
-
-      <div>🏷️</div>
-
-      <h3>
-        এখনো কোনো অফার নেই
-      </h3>
-
-      <p>
-        অনুমোদিত দোকানের বাস্তব অফার এখানে
-        দেখানো হবে।
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="featured" class="section tint">
-
-  <div class="wrap">
-
-    <div class="head">
-
-      <div>
-        <label>FEATURED</label>
-        <h2>Featured Shops</h2>
-      </div>
-
-    </div>
-
-
-    <div class="empty small">
-
-      <div>⭐</div>
-
-      <h3>
-        এখনো কোনো Featured Shop নেই
-      </h3>
-
-      <p>
-        Admin Premium/Featured হিসেবে অনুমোদন
-        করলে এখানে দেখা যাবে।
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="special" class="section">
-
-  <div class="wrap">
-
-    <div class="special">
-
-      <div>⭐</div>
-
-      <section>
-
-        <label>DIRECTORY</label>
-
-        <h2>
-          Owner ও বিশেষ ব্যক্তিবর্গ
-        </h2>
-
-        <p>
-          Admin-এর মাধ্যমে প্রকাশিত গুরুত্বপূর্ণ
-          ব্যক্তিদের তথ্য।
-        </p>
-
-      </section>
-
-      <b>→</b>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="contact" class="section contact">
-
-  <div class="wrap">
-
-    <div class="contact-card">
-
-      <label>
-        RUHIA UPAZILA BAZAR
-      </label>
-
-      <h2>
-        রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়
-      </h2>
-
-      <p>
-        স্থানীয় ব্যবসা খুঁজুন এবং Shop Owner হিসেবে
-        আপনার ব্যবসা প্রচার করুন।
-      </p>
-
-      <a href="owner-login.html">
-        Shop Owner Login
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="logo"><b>R</b><b>B</b><i>⌂</i></span><span><strong>Ruhia</strong><small>Upazila Bazar</small></span></a>
+<a class="owner" href="owner-login.html">Owner Login</a>
+</div></header>
+
+<section class="hero"><div class="hero-in wrap">
+<span class="location">📍 Ruhia • Thakurgaon</span>
+<h1>রুহিয়ার ব্যবসা,<br><em>অফার ও সেবা</em>—এক জায়গায়</h1>
+<p>কাছাকাছি দোকান, পণ্য, সেবা ও অফার সহজেই খুঁজে নিন।</p>
+<div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="দোকান, পণ্য, সেবা বা ক্যাটাগরি খুঁজুন"><button id="searchBtn">খুঁজুন</button></div>
+<div class="quick">
+<button data-cat="মুদিখানা">🛒 মুদিখানা</button>
+<button data-cat="কসমেটিকস">💄 কসমেটিকস</button>
+<button data-cat="রেস্টুরেন্ট ও খাবার">🍲 খাবার</button>
+<button data-cat="মোবাইল ও কম্পিউটার">📱 মোবাইল</button>
+<button data-cat="ফার্মেসি">💊 ফার্মেসি</button>
+</div></div></section>
+
+<section class="promo"><div class="wrap"><div class="promo-card">
+<div class="promo-icon">🏪</div>
+<div><label>SHOP OWNER</label><h2>আপনার দোকান যুক্ত করুন</h2><p>তথ্য, ছবি, পণ্য/সেবা ও অফার নিজেই পরিচালনা করুন।</p></div>
+<a href="owner-register.html">দোকান যুক্ত করুন <b>→</b></a>
+</div></div></section>
+
+<section id="categories" class="section"><div class="wrap">
+<div class="head"><div><label>BROWSE</label><h2>সব ক্যাটাগরি</h2></div><span>27টি</span></div>
+<div class="cats">
+<button data-cat="মুদিখানা"><i>🛒</i>মুদিখানা</button>
+<button data-cat="পোশাক ও ফ্যাশন"><i>👗</i>পোশাক ও ফ্যাশন</button>
+<button data-cat="জুতা ও ব্যাগ"><i>👞</i>জুতা ও ব্যাগ</button>
+<button data-cat="কসমেটিকস"><i>💄</i>কসমেটিকস</button>
+<button data-cat="জুয়েলারি"><i>💍</i>জুয়েলারি</button>
+<button data-cat="মোবাইল ও কম্পিউটার"><i>📱</i>মোবাইল ও কম্পিউটার</button>
+<button data-cat="ইলেকট্রনিক্স"><i>💻</i>ইলেকট্রনিক্স</button>
+<button data-cat="রেস্টুরেন্ট ও খাবার"><i>🍲</i>রেস্টুরেন্ট ও খাবার</button>
+<button data-cat="বেকারি ও মিষ্টি"><i>🧁</i>বেকারি ও মিষ্টি</button>
+<button data-cat="ফার্মেসি"><i>💊</i>ফার্মেসি</button>
+<button data-cat="ডাক্তার ও ক্লিনিক"><i>🩺</i>ডাক্তার ও ক্লিনিক</button>
+<button data-cat="বিউটি ও সেলুন"><i>💇</i>বিউটি ও সেলুন</button>
+<button data-cat="শিক্ষা"><i>📚</i>শিক্ষা</button>
+<button data-cat="কোচিং সেন্টার"><i>🎓</i>কোচিং সেন্টার</button>
+<button data-cat="সার্ভিসেস"><i>🛠️</i>সার্ভিসেস</button>
+<button data-cat="প্রিন্টিং ও ফটোকপি"><i>🖨️</i>প্রিন্টিং ও ফটোকপি</button>
+<button data-cat="ফটোগ্রাফি ও স্টুডিও"><i>📸</i>ফটোগ্রাফি ও স্টুডিও</button>
+<button data-cat="হার্ডওয়্যার ও নির্মাণ সামগ্রী"><i>🔧</i>হার্ডওয়্যার ও নির্মাণ</button>
+<button data-cat="ফার্নিচার"><i>🪑</i>ফার্নিচার</button>
+<button data-cat="অটো, গাড়ি ও পরিবহন"><i>🚗</i>অটো, গাড়ি ও পরিবহন</button>
+<button data-cat="বাইক/গাড়ির পার্টস ও সার্ভিস"><i>🏍️</i>বাইক/গাড়ির পার্টস</button>
+<button data-cat="কৃষি ও কৃষি সামগ্রী"><i>🌾</i>কৃষি ও কৃষি সামগ্রী</button>
+<button data-cat="গবাদিপশু ও পোলট্রি"><i>🐄</i>গবাদিপশু ও পোলট্রি</button>
+<button data-cat="জমি, বাড়ি ও রিয়েল এস্টেট"><i>🏠</i>জমি, বাড়ি ও রিয়েল এস্টেট</button>
+<button data-cat="ব্যবসায়িক ও পেশাগত সেবা"><i>💼</i>ব্যবসায়িক ও পেশাগত সেবা</button>
+<button data-cat="ইভেন্ট ও ডেকোরেশন"><i>🎉</i>ইভেন্ট ও ডেকোরেশন</button>
+<button data-cat="হোম সার্ভিস"><i>🧹</i>হোম সার্ভিস</button>
+</div></div></section>
+
+<section id="shops" class="section tint"><div class="wrap">
+<div class="head"><div><label>DIRECTORY</label><h2>দোকান ও ব্যবসা</h2></div></div>
+<p id="shopStatus">দোকান লোড হচ্ছে...</p>
+<div id="shopList" class="live-grid"></div>
+<div id="shopEmpty" class="empty" style="display:none"><div>🏪</div><h3>এখনো কোনো অনুমোদিত দোকান নেই</h3><p>অনুমোদিত দোকান এখানে দেখা যাবে।</p><a href="owner-register.html">প্রথম দোকান যুক্ত করুন →</a></div>
+</div></section>
+
+<section id="offers" class="section"><div class="wrap">
+<div class="head"><div><label>OFFERS</label><h2>চলমান অফার</h2></div></div>
+<p id="offerStatus">অফার লোড হচ্ছে...</p>
+<div id="offerList" class="live-grid"></div>
+<div id="offerEmpty" class="empty small" style="display:none"><div>🏷️</div><h3>এখনো কোনো চলমান অফার নেই</h3><p>সক্রিয় অফার এখানে দেখা যাবে।</p></div>
+</div></section><section id="featured" class="section tint"><div class="wrap">
+<div class="head"><div><label>FEATURED</label><h2>Featured Shops</h2></div></div>
+<p id="featuredStatus">Featured দোকান লোড হচ্ছে...</p>
+<div id="featuredList" class="live-grid"></div>
+<div id="featuredEmpty" class="empty small" style="display:none"><div>⭐</div><h3>এখনো কোনো Featured Shop নেই</h3><p>Admin Featured হিসেবে অনুমোদন করলে এখানে দেখা যাবে।</p></div>
+</div></section>
+
+<section id="special" class="section"><div class="wrap">
+<a class="special" href="special-people.html"><div>⭐</div><section><label>DIRECTORY</label><h2>Owner ও বিশেষ ব্যক্তিবর্গ</h2><p>Admin-এর মাধ্যমে প্রকাশিত গুরুত্বপূর্ণ ব্যক্তিদের তথ্য।</p></section><b>→</b></a>
+</div></section>
+
+<section id="contact" class="section contact"><div class="wrap">
+<div class="contact-card"><label>RUHIA UPAZILA BAZAR</label><h2>রুহিয়ার ব্যবসা, অফার ও সেবা—এক জায়গায়</h2><p>স্থানীয় ব্যবসা খুঁজুন এবং Shop Owner হিসেবে আপনার ব্যবসা প্রচার করুন।</p><a href="owner-login.html">Shop Owner Login</a></div>
+</div></section>
 
 <nav class="bottom">
-
-  <a href="index.html">
-    <b>⌂</b>
-    <small>হোম</small>
-  </a>
-
-  <a href="#categories">
-    <b>▦</b>
-    <small>ক্যাটাগরি</small>
-  </a>
-
-  <a class="add" href="owner-register.html">
-    <b>＋</b>
-    <small>দোকান</small>
-  </a>
-
-  <a href="#offers">
-    <b>🏷</b>
-    <small>অফার</small>
-  </a>
-
-  <a href="owner-login.html">
-    <b>♙</b>
-    <small>Owner</small>
-  </a>
-
+<a href="index.html"><b>⌂</b><small>হোম</small></a>
+<a href="#categories"><b>▦</b><small>ক্যাটাগরি</small></a>
+<a class="add" href="owner-register.html"><b>＋</b><small>দোকান</small></a>
+<a href="#offers"><b>🏷</b><small>অফার</small></a>
+<a href="owner-login.html"><b>♙</b><small>Owner</small></a>
 </nav>
+<footer>© <span id="year"></span> Ruhia Upazila Bazar</footer>
 
-
-<footer>
-  © <span id="year"></span> Ruhia Upazila Bazar
-</footer>
-
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script>
+const $=id=>document.getElementById(id);
+let allShops=[],allOffers=[];
+$("year").textContent=new Date().getFullYear();
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-function selectCat(c) {
-
-  document.getElementById("searchInput").value = c;
-
-  document
-    .getElementById("shops")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
+function safe(v){
+ return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
+function shopCategory(s){return s.category||s.category_name||"";}
 
-document
-  .querySelectorAll("[data-cat]")
-  .forEach(x => {
+function shopCard(s){
+ const name=s.shop_name||s.name||"দোকান";
+ const photo=s.logo_url||s.cover_url||"";
+ const details=[shopCategory(s),s.locality||s.address].filter(Boolean).join(" • ");
+ return `<article class="live-card">
+ ${photo?`<img src="${safe(photo)}" alt="${safe(name)}" loading="lazy">`:'<div class="live-placeholder">🏪</div>'}
+ <div class="live-info"><h3>${safe(name)}</h3>
+ ${details?`<p>${safe(details)}</p>`:""}
+ ${s.description?`<p>${safe(s.description)}</p>`:""}
+ ${s.mobile?`<p>📞 ${safe(s.mobile)}</p>`:""}
+ <span class="live-tag">${safe(shopCategory(s)||"স্থানীয় ব্যবসা")}</span>
+ ${s.whatsapp?`<p><a target="_blank" rel="noopener" href="https://wa.me/${safe(String(s.whatsapp).replace(/[^0-9]/g,""))}">WhatsApp যোগাযোগ →</a></p>`:""}
+ </div></article>`;
+}
 
-    x.addEventListener(
-      "click",
-      () => selectCat(x.dataset.cat)
-    );
+function offerCard(o){
+ const name=o.title||"বিশেষ অফার";
+ const photo=o.image_url||"";
+ const shop=allShops.find(s=>String(s.id)===String(o.shop_id));
+ const shopName=shop?(shop.shop_name||shop.name):"রুহিয়ার দোকান";
+ return `<article class="live-card">
+ ${photo?`<img src="${safe(photo)}" alt="${safe(name)}" loading="lazy">`:'<div class="live-placeholder">🎁</div>'}
+ <div class="live-info"><h3>${safe(name)}</h3>
+ <span class="live-tag">${safe(o.discount_text||"বিশেষ অফার")}</span>
+ <p>🏪 ${safe(shopName)}</p>
+ ${o.description?`<p>${safe(o.description)}</p>`:""}
+ ${o.end_date?`<p>শেষ তারিখ: ${safe(o.end_date)}</p>`:""}
+ </div></article>`;
+}
 
-  });
+function renderShops(list){
+ $("shopList").innerHTML=list.map(shopCard).join("");
+ $("shopEmpty").style.display=list.length?"none":"block";
+ $("shopStatus").textContent=list.length?`${list.length}টি অনুমোদিত দোকান`:"";
+}
 
+function renderOffers(list){
+ $("offerList").innerHTML=list.map(offerCard).join("");
+ $("offerEmpty").style.display=list.length?"none":"block";
+ $("offerStatus").textContent=list.length?`${list.length}টি সক্রিয় অফার`:"";
+}
 
-document
-  .getElementById("searchBtn")
-  .addEventListener("click", () => {
+function search(){
+ const q=$("searchInput").value.trim().toLocaleLowerCase("bn");
+ const list=!q?allShops:allShops.filter(s=>
+ [s.shop_name,s.name,s.category,s.category_name,s.locality,s.address,s.description,s.mobile]
+ .some(v=>String(v||"").toLocaleLowerCase("bn").includes(q))
+ );
+ renderShops(list);
+ $("shops").scrollIntoView({behavior:"smooth"});
+}
 
-    if (
-      document
-        .getElementById("searchInput")
-        .value
-        .trim()
-    ) {
+async function loadPublicData(){
+ if(!window.supabaseClient){
+  $("shopStatus").textContent="ডাটাবেস সংযোগ পাওয়া যাচ্ছে না।";
+  $("offerStatus").textContent="ডাটাবেস সংযোগ পাওয়া যাচ্ছে না।";
+  $("featuredStatus").textContent="ডাটাবেস সংযোগ পাওয়া যাচ্ছে না।";
+  return;
+ }
 
-      document
-        .getElementById("shops")
-        .scrollIntoView({
-          behavior: "smooth"
-        });
+ const client=window.supabaseClient;
+ const [sr,or]=await Promise.all([
+  client.from("shops").select("*").eq("status","active").order("created_at",{ascending:false}),
+  client.from("offers").select("*").eq("status","active").order("created_at",{ascending:false})
+ ]);
 
-    }
+ if(sr.error){
+  $("shopStatus").textContent="দোকান লোড করা যায়নি।";
+  $("shopEmpty").style.display="block";
+ }else{
+  allShops=sr.data||[];
+  renderShops(allShops);
+  const featured=allShops.filter(s=>s.featured===true);
+  $("featuredList").innerHTML=featured.map(shopCard).join("");
+  $("featuredEmpty").style.display=featured.length?"none":"block";
+  $("featuredStatus").textContent=featured.length?`${featured.length}টি Featured দোকান`:"";
+ }
 
-  });
+ if(or.error){
+  $("offerStatus").textContent="অফার লোড করা যায়নি।";
+  $("offerEmpty").style.display="block";
+ }else{
+  const today=new Date().toISOString().slice(0,10);
+  allOffers=(or.data||[]).filter(o=>
+   (!o.start_date||o.start_date<=today)&&(!o.end_date||o.end_date>=today)
+  );
+  renderOffers(allOffers);
+ }
+}
 
+document.querySelectorAll("[data-cat]").forEach(b=>{
+ b.addEventListener("click",()=>{
+  $("searchInput").value=b.dataset.cat;
+  const q=b.dataset.cat.toLocaleLowerCase("bn");
+  renderShops(allShops.filter(s=>
+   [s.category,s.category_name,s.shop_name,s.description]
+   .some(v=>String(v||"").toLocaleLowerCase("bn").includes(q))
+  ));
+  $("shops").scrollIntoView({behavior:"smooth"});
+ });
+});
+
+$("searchBtn").addEventListener("click",search);
+$("searchInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter")search();
+});
+
+loadPublicData();
 </script>
-
-
-<script src="app.js"></script>
-
 </body>
 </html>
